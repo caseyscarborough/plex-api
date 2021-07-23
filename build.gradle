@@ -1,25 +1,26 @@
 plugins {
-    // Apply the java-library plugin for API and implementation separation.
+    id 'java'
     id 'java-library'
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
-    // 'api' dependencies are exported to consumers, that is to say found on their compile classpath.
-
-    // 'implementation' dependencies are used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4'
 
-    // Use JUnit Jupiter for testing.
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 }
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
