@@ -1,0 +1,51 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MediaContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Location">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:byte" name="id"/>
+                                            <xs:attribute type="xs:string" name="path"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="allowSync"/>
+                        <xs:attribute type="xs:string" name="art"/>
+                        <xs:attribute type="xs:string" name="composite"/>
+                        <xs:attribute type="xs:byte" name="filters"/>
+                        <xs:attribute type="xs:byte" name="refreshing"/>
+                        <xs:attribute type="xs:string" name="thumb"/>
+                        <xs:attribute type="xs:byte" name="key"/>
+                        <xs:attribute type="xs:string" name="type"/>
+                        <xs:attribute type="xs:string" name="title"/>
+                        <xs:attribute type="xs:string" name="agent"/>
+                        <xs:attribute type="xs:string" name="scanner"/>
+                        <xs:attribute type="xs:string" name="language"/>
+                        <xs:attribute type="xs:string" name="uuid"/>
+                        <xs:attribute type="xs:int" name="updatedAt"/>
+                        <xs:attribute type="xs:int" name="createdAt"/>
+                        <xs:attribute type="xs:int" name="scannedAt"/>
+                        <xs:attribute type="xs:byte" name="content"/>
+                        <xs:attribute type="xs:byte" name="directory"/>
+                        <xs:attribute type="xs:byte" name="contentChangedAt"/>
+                        <xs:attribute type="xs:byte" name="hidden"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="size"/>
+            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:string" name="identifier"/>
+            <xs:attribute type="xs:string" name="mediaTagPrefix"/>
+            <xs:attribute type="xs:int" name="mediaTagVersion"/>
+            <xs:attribute type="xs:string" name="title1"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

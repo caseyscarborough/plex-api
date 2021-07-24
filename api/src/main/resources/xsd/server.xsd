@@ -1,0 +1,70 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MediaContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:byte" name="count" use="optional"/>
+                                <xs:attribute type="xs:string" name="key" use="optional"/>
+                                <xs:attribute type="xs:string" name="title" use="optional"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="size"/>
+            <xs:attribute type="xs:byte" name="allowCameraUpload"/>
+            <xs:attribute type="xs:byte" name="allowChannelAccess"/>
+            <xs:attribute type="xs:byte" name="allowMediaDeletion"/>
+            <xs:attribute type="xs:byte" name="allowSharing"/>
+            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:byte" name="allowTuners"/>
+            <xs:attribute type="xs:byte" name="backgroundProcessing"/>
+            <xs:attribute type="xs:byte" name="certificate"/>
+            <xs:attribute type="xs:byte" name="companionProxy"/>
+            <xs:attribute type="xs:string" name="diagnostics"/>
+            <xs:attribute type="xs:byte" name="eventStream"/>
+            <xs:attribute type="xs:string" name="friendlyName"/>
+            <xs:attribute type="xs:byte" name="games"/>
+            <xs:attribute type="xs:byte" name="hubSearch"/>
+            <xs:attribute type="xs:byte" name="itemClusters"/>
+            <xs:attribute type="xs:byte" name="livetv"/>
+            <xs:attribute type="xs:string" name="machineIdentifier"/>
+            <xs:attribute type="xs:byte" name="mediaProviders"/>
+            <xs:attribute type="xs:byte" name="multiuser"/>
+            <xs:attribute type="xs:byte" name="myPlex"/>
+            <xs:attribute type="xs:string" name="myPlexMappingState"/>
+            <xs:attribute type="xs:string" name="myPlexSigninState"/>
+            <xs:attribute type="xs:byte" name="myPlexSubscription"/>
+            <xs:attribute type="xs:string" name="myPlexUsername"/>
+            <xs:attribute type="xs:byte" name="offlineTranscode"/>
+            <xs:attribute type="xs:string" name="ownerFeatures"/>
+            <xs:attribute type="xs:byte" name="photoAutoTag"/>
+            <xs:attribute type="xs:string" name="platform"/>
+            <xs:attribute type="xs:string" name="platformVersion"/>
+            <xs:attribute type="xs:byte" name="pluginHost"/>
+            <xs:attribute type="xs:byte" name="pushNotifications"/>
+            <xs:attribute type="xs:byte" name="readOnlyLibraries"/>
+            <xs:attribute type="xs:byte" name="requestParametersInCookie"/>
+            <xs:attribute type="xs:byte" name="streamingBrainABRVersion"/>
+            <xs:attribute type="xs:byte" name="streamingBrainVersion"/>
+            <xs:attribute type="xs:byte" name="sync"/>
+            <xs:attribute type="xs:byte" name="transcoderActiveVideoSessions"/>
+            <xs:attribute type="xs:byte" name="transcoderAudio"/>
+            <xs:attribute type="xs:byte" name="transcoderLyrics"/>
+            <xs:attribute type="xs:byte" name="transcoderPhoto"/>
+            <xs:attribute type="xs:byte" name="transcoderSubtitles"/>
+            <xs:attribute type="xs:byte" name="transcoderVideo"/>
+            <xs:attribute type="xs:string" name="transcoderVideoBitrates"/>
+            <xs:attribute type="xs:string" name="transcoderVideoQualities"/>
+            <xs:attribute type="xs:string" name="transcoderVideoResolutions"/>
+            <xs:attribute type="xs:int" name="updatedAt"/>
+            <xs:attribute type="xs:byte" name="updater"/>
+            <xs:attribute type="xs:string" name="version"/>
+            <xs:attribute type="xs:byte" name="voiceSearch"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

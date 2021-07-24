@@ -1,0 +1,28 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MediaContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:string" name="key" use="optional"/>
+                                <xs:attribute type="xs:string" name="title" use="optional"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="size"/>
+            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:string" name="art"/>
+            <xs:attribute type="xs:string" name="content"/>
+            <xs:attribute type="xs:string" name="identifier"/>
+            <xs:attribute type="xs:string" name="mediaTagPrefix"/>
+            <xs:attribute type="xs:int" name="mediaTagVersion"/>
+            <xs:attribute type="xs:string" name="title1"/>
+            <xs:attribute type="xs:string" name="title2"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
