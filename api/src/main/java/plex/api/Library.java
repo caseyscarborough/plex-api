@@ -3,7 +3,6 @@ package plex.api;
 import lombok.experimental.Delegate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ public final class Library extends BasePlexObject {
     private final LibraryDelegate delegate;
     private final Map<String, Section> sectionsById = new HashMap<>();
 
-    Library(final LibraryDelegate delegate, final PlexClient client) {
+    public Library(PlexClient client, LibraryDelegate delegate) {
         super(client);
         this.delegate = delegate;
     }

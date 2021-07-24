@@ -1,18 +1,12 @@
 package plex.api;
 
-import lombok.Getter;
-import lombok.experimental.Accessors;
 import lombok.experimental.Delegate;
+import org.apache.commons.lang3.StringUtils;
 import plex.api.exception.BadRequestException;
 
-public final class PlexServer {
+public final class PlexServer extends BasePlexObject {
 
     private static final String DEFAULT_SERVER = "http://localhost:32400";
-
-    @Getter
-    @Accessors(fluent = true)
-    private final String host;
-    private final PlexClient client;
 
     @Delegate
     private PlexServerDelegate delegate;
@@ -23,12 +17,19 @@ public final class PlexServer {
     }
 
     public PlexServer(String host, String token) {
-        this.host = host.endsWith("/") ? host.substring(0, host.length() - 1) : host;
+        this(
+            new PlexClient(
+                StringUtils.stripEnd(host, "/"),
+                token
+            )
+        );
+    }
+
+    PlexServer(final PlexClient client) {
+        super(client);
         // Cached Library
         this.library = null;
         // Cached server
-        this.delegate = null;
-        this.client = new PlexClient(host, token);
         this.delegate = server();
     }
 
@@ -39,15 +40,16 @@ public final class PlexServer {
 
         LibraryDelegate delegate;
         try {
-            delegate = client.get(ObjectType.LIBRARY, LibraryResponse.class, LibraryDelegate.class);
+            delegate = getClient().get(ObjectType.LIBRARY, LibraryResponse.class, LibraryDelegate.class);
         } catch (BadRequestException e) {
             // Fallback to /library/sections on bad request, only owners can call /library.
-            delegate = client.get(ObjectType.SECTION, SectionResponse.class, LibraryDelegate.class);
+            delegate = getClient().get(ObjectType.SECTION, SectionResponse.class, LibraryDelegate.class);
         }
-        return new Library(delegate, this.client);
+        this.library = new Library(getClient(), delegate);
+        return this.library;
     }
 
     private PlexServerDelegate server() {
-        return client.get(ObjectType.SERVER, ServerResponse.class, PlexServerDelegate.class);
+        return getClient().get(ObjectType.SERVER, ServerResponse.class, PlexServerDelegate.class);
     }
 }

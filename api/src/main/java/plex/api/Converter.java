@@ -1,6 +1,6 @@
 package plex.api;
 
-interface Converter <F, T> {
+interface Converter<F, T> {
 
     T convert(F input);
 
