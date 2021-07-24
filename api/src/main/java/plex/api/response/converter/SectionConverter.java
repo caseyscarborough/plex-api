@@ -41,4 +41,14 @@ final class SectionConverter extends BaseConverter<SectionResponse, Section[]> {
         // See https://stackoverflow.com/a/9572820/2446208
         return sections.toArray(new Section[0]);
     }
+
+    @Override
+    public Class<SectionResponse> from() {
+        return SectionResponse.class;
+    }
+
+    @Override
+    public Class<Section[]> to() {
+        return Section[].class;
+    }
 }

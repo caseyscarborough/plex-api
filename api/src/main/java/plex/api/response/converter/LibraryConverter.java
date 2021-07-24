@@ -17,4 +17,14 @@ final class LibraryConverter extends BaseConverter<LibraryResponse, Library> {
             .title2(input.getTitle2())
             .build();
     }
+
+    @Override
+    public Class<LibraryResponse> from() {
+        return LibraryResponse.class;
+    }
+
+    @Override
+    public Class<Library> to() {
+        return Library.class;
+    }
 }

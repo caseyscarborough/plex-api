@@ -58,4 +58,14 @@ final class ServerConverter extends BaseConverter<ServerResponse, Server> {
             .voiceSearch(toBoolean(input.getVoiceSearch()))
             .build();
     }
+
+    @Override
+    public Class<ServerResponse> from() {
+        return ServerResponse.class;
+    }
+
+    @Override
+    public Class<Server> to() {
+        return Server.class;
+    }
 }

@@ -14,4 +14,14 @@ final class FallbackLibraryConverter extends BaseConverter<SectionResponse, Libr
             .title1(input.getTitle1())
             .build();
     }
+
+    @Override
+    public Class<SectionResponse> from() {
+        return SectionResponse.class;
+    }
+
+    @Override
+    public Class<Library> to() {
+        return Library.class;
+    }
 }
