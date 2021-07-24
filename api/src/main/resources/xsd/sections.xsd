@@ -10,20 +10,20 @@
                                 <xs:complexType>
                                     <xs:simpleContent>
                                         <xs:extension base="xs:string">
-                                            <xs:attribute type="xs:byte" name="id"/>
+                                            <xs:attribute type="xs:int" name="id"/>
                                             <xs:attribute type="xs:string" name="path"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
-                        <xs:attribute type="xs:byte" name="allowSync"/>
+                        <xs:attribute type="xs:int" name="allowSync"/>
                         <xs:attribute type="xs:string" name="art"/>
                         <xs:attribute type="xs:string" name="composite"/>
-                        <xs:attribute type="xs:byte" name="filters"/>
-                        <xs:attribute type="xs:byte" name="refreshing"/>
+                        <xs:attribute type="xs:int" name="filters"/>
+                        <xs:attribute type="xs:int" name="refreshing"/>
                         <xs:attribute type="xs:string" name="thumb"/>
-                        <xs:attribute type="xs:byte" name="key"/>
+                        <xs:attribute type="xs:int" name="key"/>
                         <xs:attribute type="xs:string" name="type"/>
                         <xs:attribute type="xs:string" name="title"/>
                         <xs:attribute type="xs:string" name="agent"/>
@@ -33,15 +33,15 @@
                         <xs:attribute type="xs:int" name="updatedAt"/>
                         <xs:attribute type="xs:int" name="createdAt"/>
                         <xs:attribute type="xs:int" name="scannedAt"/>
-                        <xs:attribute type="xs:byte" name="content"/>
-                        <xs:attribute type="xs:byte" name="directory"/>
-                        <xs:attribute type="xs:byte" name="contentChangedAt"/>
-                        <xs:attribute type="xs:byte" name="hidden"/>
+                        <xs:attribute type="xs:int" name="content"/>
+                        <xs:attribute type="xs:int" name="directory"/>
+                        <xs:attribute type="xs:int" name="contentChangedAt"/>
+                        <xs:attribute type="xs:int" name="hidden"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute type="xs:byte" name="size"/>
-            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:int" name="size"/>
+            <xs:attribute type="xs:int" name="allowSync"/>
             <xs:attribute type="xs:string" name="identifier"/>
             <xs:attribute type="xs:string" name="mediaTagPrefix"/>
             <xs:attribute type="xs:int" name="mediaTagVersion"/>

@@ -14,8 +14,8 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute type="xs:byte" name="size"/>
-            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:int" name="size"/>
+            <xs:attribute type="xs:int" name="allowSync"/>
             <xs:attribute type="xs:string" name="art"/>
             <xs:attribute type="xs:string" name="content"/>
             <xs:attribute type="xs:string" name="identifier"/>

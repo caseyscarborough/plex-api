@@ -21,8 +21,8 @@
                                         </xs:appinfo>
                                     </xs:annotation>
                                 </xs:attribute>
-                                <xs:attribute type="xs:byte" name="hidden"/>
-                                <xs:attribute type="xs:byte" name="advanced"/>
+                                <xs:attribute type="xs:int" name="hidden"/>
+                                <xs:attribute type="xs:int" name="advanced"/>
                                 <xs:attribute type="xs:string" name="group"/>
                                 <xs:attribute type="xs:string" name="enumValues"/>
                             </xs:extension>
@@ -30,7 +30,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute type="xs:short" name="size"/>
+            <xs:attribute type="xs:int" name="size"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>
