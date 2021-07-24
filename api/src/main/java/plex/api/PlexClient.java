@@ -43,8 +43,8 @@ final class PlexClient {
         this.factory = new ConverterFactory();
     }
 
-    <F, T> T get(ObjectType type, Class<F> from, Class<T> to) {
-        final String url = this.host + type.getPath();
+    <F, T> T get(final String path, Class<F> from, Class<T> to) {
+        final String url = this.host + path;
         Request request = new Request.Builder()
             .url(url)
             .build();

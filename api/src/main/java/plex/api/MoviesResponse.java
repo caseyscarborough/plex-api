@@ -9,10 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +77,8 @@ class MoviesResponse {
     public static class Video {
 
         @XmlElement(name = "Media", required = true)
-        private MoviesResponse.Video.Media media;
+        @JacksonXmlElementWrapper(useWrapping = false)
+        private List<MoviesResponse.Video.Media> media;
         @XmlElement(name = "Genre")
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<MoviesResponse.Video.Genre> genre;
@@ -93,7 +92,8 @@ class MoviesResponse {
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<MoviesResponse.Video.Country> country;
         @XmlElement(name = "Collection")
-        private MoviesResponse.Video.Collection collection;
+        @JacksonXmlElementWrapper(useWrapping = false)
+        private List<MoviesResponse.Video.Collection> collection;
         @XmlElement(name = "Role")
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<MoviesResponse.Video.Role> role;
@@ -130,8 +130,7 @@ class MoviesResponse {
         @XmlAttribute(name = "duration")
         private Integer duration;
         @XmlAttribute(name = "originallyAvailableAt")
-        @XmlSchemaType(name = "date")
-        private XMLGregorianCalendar originallyAvailableAt;
+        private String originallyAvailableAt;
         @XmlAttribute(name = "addedAt")
         private Integer addedAt;
         @XmlAttribute(name = "updatedAt")
@@ -157,11 +156,18 @@ class MoviesResponse {
         @XmlAttribute(name = "viewOffset")
         private Integer viewOffset;
 
-        public List<MoviesResponse.Video.Genre> getGenre() {
-            if (genre == null) {
-                genre = new ArrayList<>();
+        public List<MoviesResponse.Video.Media> getMedia() {
+            if (media == null) {
+                media = new ArrayList<>();
             }
-            return this.genre;
+            return this.media;
+        }
+
+        public List<MoviesResponse.Video.Collection> getCollection() {
+            if (collection == null) {
+                collection = new ArrayList<>();
+            }
+            return this.collection;
         }
 
         public List<MoviesResponse.Video.Director> getDirector() {
@@ -259,7 +265,8 @@ class MoviesResponse {
         public static class Media {
 
             @XmlElement(name = "Part", required = true)
-            private MoviesResponse.Video.Media.Part part;
+            @JacksonXmlElementWrapper(useWrapping = false)
+            private List<MoviesResponse.Video.Media.Part> part;
             @XmlAttribute(name = "id")
             private Integer id;
             @XmlAttribute(name = "duration")
@@ -292,6 +299,13 @@ class MoviesResponse {
             private Integer has64BitOffsets;
             @XmlAttribute(name = "videoProfile")
             private String videoProfile;
+
+            public List<MoviesResponse.Video.Media.Part> getPart() {
+                if (part == null) {
+                    part = new ArrayList<>();
+                }
+                return this.part;
+            }
 
             @XmlAccessorType(XmlAccessType.FIELD)
             @XmlType(name = "", propOrder = {

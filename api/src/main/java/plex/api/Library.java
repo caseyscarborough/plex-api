@@ -20,13 +20,8 @@ public final class Library extends BasePlexObject {
         this.delegate = delegate;
     }
 
-    @Override
-    public ObjectType getType() {
-        return ObjectType.LIBRARY;
-    }
-
     public List<Section> sections() {
-        final SectionDelegate[] delegates = getClient().get(ObjectType.SECTION, SectionResponse.class, SectionDelegate[].class);
+        final SectionDelegate[] delegates = getClient().get(ObjectType.SECTION.getPath(), SectionResponse.class, SectionDelegate[].class);
         final List<Section> sections = new ArrayList<>();
         for (SectionDelegate delegate : delegates) {
             Section section = new Section(this.getClient(), delegate);
@@ -38,7 +33,7 @@ public final class Library extends BasePlexObject {
 
     public Section section(final String title) {
         for (Section section : this.sections()) {
-            if (section.title().toLowerCase(Locale.ROOT).equals(title)) {
+            if (section.title().toLowerCase(Locale.ROOT).equals(title.toLowerCase(Locale.ROOT))) {
                 return section;
             }
         }

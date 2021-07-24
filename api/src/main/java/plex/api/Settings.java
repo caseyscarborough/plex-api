@@ -20,9 +20,4 @@ public class Settings extends BasePlexObject {
             .findFirst()
             .orElseThrow(() -> new NotFoundException("Invalid setting id: " + id));
     }
-
-    @Override
-    public ObjectType getType() {
-        return ObjectType.SETTINGS;
-    }
 }

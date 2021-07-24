@@ -13,7 +13,8 @@ final class ConverterFactory {
             new LibraryConverter(),
             new LibraryFallbackConverter(),
             new SectionConverter(),
-            new SettingsConverter()
+            new SettingsConverter(),
+            new MoviesConverter()
         );
     }
 

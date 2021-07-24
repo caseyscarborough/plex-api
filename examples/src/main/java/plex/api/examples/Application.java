@@ -1,10 +1,13 @@
 package plex.api.examples;
 
 import plex.api.Library;
+import plex.api.Movie;
 import plex.api.PlexServer;
 import plex.api.Section;
 import plex.api.Setting;
 import plex.api.Settings;
+
+import java.util.List;
 
 public class Application {
 
@@ -28,6 +31,9 @@ public class Application {
             System.out.println(setting);
         }
 
-        final Section movies = server.library().section("Movies");
+        final List<Movie> movies = server.library().section("Movies").onDeck();
+        for (Movie movie : movies) {
+            System.out.println(movie);
+        }
     }
 }
