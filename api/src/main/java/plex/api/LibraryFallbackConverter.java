@@ -1,12 +1,10 @@
-package plex.api.response.converter;
+package plex.api;
 
-import plex.api.model.Library;
-import plex.api.response.SectionResponse;
+final class LibraryFallbackConverter extends BaseConverter<SectionResponse, LibraryDelegate> {
 
-final class FallbackLibraryConverter extends BaseConverter<SectionResponse, Library> {
     @Override
-    public Library convert(SectionResponse input) {
-        return Library.builder()
+    public LibraryDelegate convert(SectionResponse input) {
+        return LibraryDelegate.builder()
             .allowsSync(toBoolean(input.getAllowSync()))
             .identifier(input.getIdentifier())
             .mediaTagPrefix(input.getMediaTagPrefix())
@@ -21,7 +19,7 @@ final class FallbackLibraryConverter extends BaseConverter<SectionResponse, Libr
     }
 
     @Override
-    public Class<Library> to() {
-        return Library.class;
+    public Class<LibraryDelegate> to() {
+        return LibraryDelegate.class;
     }
 }

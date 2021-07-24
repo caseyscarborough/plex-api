@@ -1,18 +1,15 @@
-package plex.api.response.converter;
-
-import plex.api.model.Section;
-import plex.api.response.SectionResponse;
+package plex.api;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-final class SectionConverter extends BaseConverter<SectionResponse, Section[]> {
+final class SectionConverter extends BaseConverter<SectionResponse, SectionDelegate[]> {
     @Override
-    public Section[] convert(SectionResponse input) {
-        List<Section> sections = new ArrayList<>();
+    public SectionDelegate[] convert(SectionResponse input) {
+        List<SectionDelegate> sections = new ArrayList<>();
         for (SectionResponse.Directory directory : input.getDirectory()) {
-            Section section = Section.builder()
+            SectionDelegate section = SectionDelegate.builder()
                 .allowsSync(toBoolean(directory.getAllowSync()))
                 .agent(directory.getAgent())
                 .art(directory.getArt())
@@ -39,7 +36,7 @@ final class SectionConverter extends BaseConverter<SectionResponse, Section[]> {
         // Using 0 for the array size can actually be faster than
         // using the correct size of the array apparently.
         // See https://stackoverflow.com/a/9572820/2446208
-        return sections.toArray(new Section[0]);
+        return sections.toArray(new SectionDelegate[0]);
     }
 
     @Override
@@ -48,7 +45,7 @@ final class SectionConverter extends BaseConverter<SectionResponse, Section[]> {
     }
 
     @Override
-    public Class<Section[]> to() {
-        return Section[].class;
+    public Class<SectionDelegate[]> to() {
+        return SectionDelegate[].class;
     }
 }

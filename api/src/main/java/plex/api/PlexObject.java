@@ -1,6 +1,4 @@
-package plex.api.model;
-
-import plex.api.ObjectType;
+package plex.api;
 
 public interface PlexObject {
 

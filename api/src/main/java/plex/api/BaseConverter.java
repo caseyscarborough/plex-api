@@ -1,4 +1,4 @@
-package plex.api.response.converter;
+package plex.api;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

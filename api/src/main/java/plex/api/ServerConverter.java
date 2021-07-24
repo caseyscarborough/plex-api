@@ -1,12 +1,10 @@
-package plex.api.response.converter;
+package plex.api;
 
-import plex.api.model.Server;
-import plex.api.response.ServerResponse;
+final class ServerConverter extends BaseConverter<ServerResponse, PlexServerDelegate> {
 
-final class ServerConverter extends BaseConverter<ServerResponse, Server> {
     @Override
-    public Server convert(ServerResponse input) {
-        return Server.builder()
+    public PlexServerDelegate convert(ServerResponse input) {
+        return PlexServerDelegate.builder()
             .allowsCameraUpload(toBoolean(input.getAllowCameraUpload()))
             .allowsChannelAccess(toBoolean(input.getAllowChannelAccess()))
             .allowsMediaDeletion(toBoolean(input.getAllowMediaDeletion()))
@@ -65,7 +63,7 @@ final class ServerConverter extends BaseConverter<ServerResponse, Server> {
     }
 
     @Override
-    public Class<Server> to() {
-        return Server.class;
+    public Class<PlexServerDelegate> to() {
+        return PlexServerDelegate.class;
     }
 }

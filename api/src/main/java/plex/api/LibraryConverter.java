@@ -1,12 +1,10 @@
-package plex.api.response.converter;
+package plex.api;
 
-import plex.api.model.Library;
-import plex.api.response.LibraryResponse;
+final class LibraryConverter extends BaseConverter<LibraryResponse, LibraryDelegate> {
 
-final class LibraryConverter extends BaseConverter<LibraryResponse, Library> {
     @Override
-    public Library convert(LibraryResponse input) {
-        return Library.builder()
+    public LibraryDelegate convert(LibraryResponse input) {
+        return LibraryDelegate.builder()
             .allowsSync(toBoolean(input.getAllowSync()))
             .art(input.getArt())
             .content(input.getContent())
@@ -24,7 +22,7 @@ final class LibraryConverter extends BaseConverter<LibraryResponse, Library> {
     }
 
     @Override
-    public Class<Library> to() {
-        return Library.class;
+    public Class<LibraryDelegate> to() {
+        return LibraryDelegate.class;
     }
 }

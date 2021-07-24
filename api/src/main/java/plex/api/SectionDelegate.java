@@ -1,10 +1,9 @@
-package plex.api.model;
+package plex.api;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import plex.api.ObjectType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,8 +12,7 @@ import java.util.List;
 @Builder
 @Accessors(fluent = true)
 @ToString
-public final class Section implements PlexObject {
-
+class SectionDelegate {
     private final boolean allowsSync;
     private final String art;
     private final String composite;
@@ -35,9 +33,4 @@ public final class Section implements PlexObject {
     private final boolean directory;
     private final boolean hidden;
     private final List<String> locations;
-
-    @Override
-    public ObjectType getType() {
-        return ObjectType.SECTION;
-    }
 }

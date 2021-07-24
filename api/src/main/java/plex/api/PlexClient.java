@@ -11,39 +11,22 @@ import plex.api.exception.NotFoundException;
 import plex.api.exception.PlexException;
 import plex.api.exception.ServerException;
 import plex.api.exception.UnauthorizedException;
-import plex.api.model.Library;
-import plex.api.model.Section;
-import plex.api.model.Server;
-import plex.api.response.LibraryResponse;
-import plex.api.response.SectionResponse;
-import plex.api.response.ServerResponse;
-import plex.api.response.converter.Converter;
-import plex.api.response.converter.ConverterFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public final class PlexClient {
+final class PlexClient {
 
-    private static final String DEFAULT_SERVER = "http://localhost:32400";
     private static final String X_PLEX_TOKEN_HEADER = "X-Plex-Token";
 
+    private final String host;
+    private final String token;
     private final OkHttpClient client;
     private final XmlMapper mapper;
-    private final String server;
-    private final String token;
-    private Library library;
+    private final ConverterFactory factory;
 
-    public PlexClient(String token) {
-        this(DEFAULT_SERVER, token);
-    }
-
-    public PlexClient(String server, String token) {
-        this.server = server.endsWith("/") ? server.substring(0, server.length() - 1) : server;
-        // Cached Library
-        this.library = null;
+    PlexClient(String host, String token) {
+        this.host = host;
         this.token = token;
         this.mapper = new XmlMapper();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -55,31 +38,11 @@ public final class PlexClient {
                     .addHeader(X_PLEX_TOKEN_HEADER, PlexClient.this.token)
                     .build()))
             .build();
+        this.factory = new ConverterFactory();
     }
 
-    public Server server() {
-        return get(ObjectType.SERVER, ServerResponse.class, Server.class);
-    }
-
-    public Library library() {
-        if (this.library != null) {
-            return this.library;
-        }
-        try {
-            this.library = get(ObjectType.LIBRARY, LibraryResponse.class, Library.class);
-        } catch (BadRequestException e) {
-            // Fallback to /library/sections on bad request, only owners can call /library.
-            this.library = get(ObjectType.SECTION, SectionResponse.class, Library.class);
-        }
-        return this.library;
-    }
-
-    public List<Section> sections() {
-        return Arrays.asList(get(ObjectType.SECTION, SectionResponse.class, Section[].class));
-    }
-
-    private <F, T> T get(ObjectType type, Class<F> from, Class<T> to) {
-        final String url = this.server + type.getPath();
+    <F, T> T get(ObjectType type, Class<F> from, Class<T> to) {
+        final String url = this.host + type.getPath();
         Request request = new Request.Builder()
             .url(url)
             .build();
@@ -89,7 +52,7 @@ public final class PlexClient {
             final String body = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
                 F parsed = this.mapper.readValue(body, from);
-                Converter<F, T> converter = new ConverterFactory().getInstance(from, to);
+                Converter<F, T> converter = factory.getInstance(from, to);
                 return converter.convert(parsed);
             }
 
@@ -108,5 +71,4 @@ public final class PlexClient {
             throw new PlexException("Could not make call to " + url, e);
         }
     }
-
 }

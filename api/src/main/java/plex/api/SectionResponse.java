@@ -1,4 +1,4 @@
-package plex.api.response;
+package plex.api;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import lombok.Getter;
@@ -21,7 +21,7 @@ import java.util.List;
 @XmlRootElement(name = "MediaContainer")
 @Getter
 @Setter
-public class SectionResponse {
+class SectionResponse {
 
     @XmlElement(name = "Directory")
     @JacksonXmlElementWrapper(useWrapping = false)

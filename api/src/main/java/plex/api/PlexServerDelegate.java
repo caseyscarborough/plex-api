@@ -1,10 +1,9 @@
-package plex.api.model;
+package plex.api;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import plex.api.ObjectType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 @Builder
 @Accessors(fluent = true)
 @ToString
-public final class Server implements PlexObject {
+final class PlexServerDelegate extends BasePlexObject {
     private final boolean allowsCameraUpload;
     private final boolean allowsChannelAccess;
     private final boolean allowsMediaDeletion;

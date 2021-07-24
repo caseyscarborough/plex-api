@@ -1,23 +1,22 @@
 package plex.api.examples;
 
-import plex.api.PlexClient;
-import plex.api.model.Library;
-import plex.api.model.Section;
-import plex.api.model.Server;
+import plex.api.Library;
+import plex.api.PlexServer;
+import plex.api.Section;
 
 public class Application {
 
     public static void main(String[] args) {
         final String token = System.getenv("PLEX_TOKEN");
         // Defaults to http://localhost:32400
-        PlexClient client = new PlexClient(token);
-        final Server server = client.server();
-        System.out.println(server);
+        PlexServer server = new PlexServer(token);
+        System.out.println("Server Host: " + server.host());
+        System.out.println("Plex Username: " + server.myPlexUsername());
 
-        final Library library = client.library();
+        final Library library = server.library();
         System.out.println(library);
 
-        for (Section section : client.sections()) {
+        for (Section section : library.sections()) {
             System.out.println(section);
         }
     }
