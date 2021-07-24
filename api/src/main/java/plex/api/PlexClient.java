@@ -34,6 +34,7 @@ public final class PlexClient {
     private final XmlMapper mapper;
     private final String server;
     private final String token;
+    private Library library;
 
     public PlexClient(String token) {
         this(DEFAULT_SERVER, token);
@@ -41,6 +42,8 @@ public final class PlexClient {
 
     public PlexClient(String server, String token) {
         this.server = server.endsWith("/") ? server.substring(0, server.length() - 1) : server;
+        // Cached Library
+        this.library = null;
         this.token = token;
         this.mapper = new XmlMapper();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -59,12 +62,16 @@ public final class PlexClient {
     }
 
     public Library library() {
+        if (this.library != null) {
+            return this.library;
+        }
         try {
-            return get(ObjectType.LIBRARY, LibraryResponse.class, Library.class);
+            this.library = get(ObjectType.LIBRARY, LibraryResponse.class, Library.class);
         } catch (BadRequestException e) {
             // Fallback to /library/sections on bad request, only owners can call /library.
-            return get(ObjectType.SECTION, SectionResponse.class, Library.class);
+            this.library = get(ObjectType.SECTION, SectionResponse.class, Library.class);
         }
+        return this.library;
     }
 
     public List<Section> sections() {
