@@ -1,5 +1,6 @@
 package plex.api;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import okhttp3.OkHttpClient;
@@ -42,6 +43,7 @@ public final class PlexClient {
         this.server = server.endsWith("/") ? server.substring(0, server.length() - 1) : server;
         this.token = token;
         this.mapper = new XmlMapper();
+        this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         this.mapper.registerModule(new JaxbAnnotationModule());
         this.client = new OkHttpClient.Builder().addInterceptor(chain ->
             chain.proceed(
