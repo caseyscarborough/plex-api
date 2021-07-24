@@ -11,10 +11,10 @@ import plex.api.exception.PlexException;
 import plex.api.exception.ServerException;
 import plex.api.exception.UnauthorizedException;
 import plex.api.model.Library;
-import plex.api.model.LibrarySection;
+import plex.api.model.Section;
 import plex.api.model.Server;
 import plex.api.response.LibraryResponse;
-import plex.api.response.LibrarySectionResponse;
+import plex.api.response.SectionResponse;
 import plex.api.response.ServerResponse;
 import plex.api.response.converter.Converter;
 import plex.api.response.converter.ConverterFactory;
@@ -60,14 +60,13 @@ public final class PlexClient {
         try {
             return get(ObjectType.LIBRARY, LibraryResponse.class, Library.class);
         } catch (BadRequestException e) {
-            // TODO: Fallback to /library/sections on bad request, only owners can call /library.
-            // return get(ObjectType.LIBRARY_SECTION, LibrarySectionResponse.class, Library.class);
-            throw e;
+            // Fallback to /library/sections on bad request, only owners can call /library.
+            return get(ObjectType.SECTION, SectionResponse.class, Library.class);
         }
     }
 
-    public List<LibrarySection> sections() {
-        return Arrays.asList(get(ObjectType.LIBRARY_SECTION, LibrarySectionResponse.class, LibrarySection[].class));
+    public List<Section> sections() {
+        return Arrays.asList(get(ObjectType.SECTION, SectionResponse.class, Section[].class));
     }
 
     private <F, T> T get(ObjectType type, Class<F> from, Class<T> to) {

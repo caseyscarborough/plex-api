@@ -1,18 +1,18 @@
 package plex.api.response.converter;
 
-import plex.api.model.LibrarySection;
-import plex.api.response.LibrarySectionResponse;
+import plex.api.model.Section;
+import plex.api.response.SectionResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-final class LibrarySectionConverter extends BaseConverter<LibrarySectionResponse, LibrarySection[]> {
+final class SectionConverter extends BaseConverter<SectionResponse, Section[]> {
     @Override
-    public LibrarySection[] convert(LibrarySectionResponse input) {
-        List<LibrarySection> sections = new ArrayList<>();
-        for (LibrarySectionResponse.Directory directory : input.getDirectory()) {
-            LibrarySection section = LibrarySection.builder()
+    public Section[] convert(SectionResponse input) {
+        List<Section> sections = new ArrayList<>();
+        for (SectionResponse.Directory directory : input.getDirectory()) {
+            Section section = Section.builder()
                 .allowsSync(toBoolean(directory.getAllowSync()))
                 .agent(directory.getAgent())
                 .art(directory.getArt())
@@ -27,7 +27,7 @@ final class LibrarySectionConverter extends BaseConverter<LibrarySectionResponse
                 .key(directory.getKey())
                 .language(directory.getLanguage())
                 .refreshing(toBoolean(directory.getRefreshing()))
-                .locations(toList(directory.getLocation().stream().map(LibrarySectionResponse.Directory.Location::getPath).collect(Collectors.joining(","))))
+                .locations(toList(directory.getLocation().stream().map(SectionResponse.Directory.Location::getPath).collect(Collectors.joining(","))))
                 .scanner(directory.getScanner())
                 .thumb(directory.getThumb())
                 .title(directory.getTitle())
@@ -36,7 +36,9 @@ final class LibrarySectionConverter extends BaseConverter<LibrarySectionResponse
                 .build();
             sections.add(section);
         }
-        LibrarySection[] output = new LibrarySection[sections.size()];
-        return sections.toArray(output);
+        // Using 0 for the array size can actually be faster than
+        // using the correct size of the array apparently.
+        // See https://stackoverflow.com/a/9572820/2446208
+        return sections.toArray(new Section[0]);
     }
 }

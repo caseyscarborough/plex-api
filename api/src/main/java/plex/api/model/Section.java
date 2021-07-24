@@ -4,10 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import plex.api.response.LibrarySectionResponse;
+import plex.api.ObjectType;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +13,7 @@ import java.util.List;
 @Builder
 @Accessors(fluent = true)
 @ToString
-public final class LibrarySection {
+public final class Section implements PlexObject {
 
     private final boolean allowsSync;
     private final String art;
@@ -37,5 +35,9 @@ public final class LibrarySection {
     private final boolean directory;
     private final boolean hidden;
     private final List<String> locations;
-    // private LocalDateTime contentChangedAt;
+
+    @Override
+    public ObjectType getType() {
+        return ObjectType.SECTION;
+    }
 }

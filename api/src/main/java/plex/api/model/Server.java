@@ -2,9 +2,9 @@ package plex.api.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import plex.api.ObjectType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @Accessors(fluent = true)
 @ToString
-public final class Server {
+public final class Server implements PlexObject {
     private final boolean allowsCameraUpload;
     private final boolean allowsChannelAccess;
     private final boolean allowsMediaDeletion;
@@ -63,4 +63,9 @@ public final class Server {
     private final boolean updater;
     private final String version;
     private final boolean voiceSearch;
+
+    @Override
+    public ObjectType getType() {
+        return ObjectType.SERVER;
+    }
 }

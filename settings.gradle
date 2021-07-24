@@ -8,3 +8,6 @@
  */
 
 rootProject.name = 'plex-api'
+include 'api'
+include 'examples'
+

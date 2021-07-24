@@ -21,11 +21,11 @@ import java.util.List;
 @XmlRootElement(name = "MediaContainer")
 @Getter
 @Setter
-public class LibrarySectionResponse {
+public class SectionResponse {
 
     @XmlElement(name = "Directory")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<LibrarySectionResponse.Directory> directory;
+    private List<SectionResponse.Directory> directory;
     @XmlAttribute(name = "size")
     private Integer size;
     @XmlAttribute(name = "allowSync")
@@ -35,11 +35,11 @@ public class LibrarySectionResponse {
     @XmlAttribute(name = "mediaTagPrefix")
     private String mediaTagPrefix;
     @XmlAttribute(name = "mediaTagVersion")
-    private Integer mediaTagVersion;
+    private String mediaTagVersion;
     @XmlAttribute(name = "title1")
     private String title1;
 
-    public List<LibrarySectionResponse.Directory> getDirectory() {
+    public List<SectionResponse.Directory> getDirectory() {
         if (directory == null) {
             directory = new ArrayList<>();
         }
@@ -56,7 +56,7 @@ public class LibrarySectionResponse {
 
         @XmlElement(name = "Location")
         @JacksonXmlElementWrapper(useWrapping = false)
-        private List<LibrarySectionResponse.Directory.Location> location;
+        private List<SectionResponse.Directory.Location> location;
         @XmlAttribute(name = "allowSync")
         private Integer allowSync;
         @XmlAttribute(name = "art")
@@ -98,7 +98,7 @@ public class LibrarySectionResponse {
         @XmlAttribute(name = "hidden")
         private Integer hidden;
 
-        public List<LibrarySectionResponse.Directory.Location> getLocation() {
+        public List<SectionResponse.Directory.Location> getLocation() {
             if (location == null) {
                 location = new ArrayList<>();
             }

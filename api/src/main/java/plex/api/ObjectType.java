@@ -1,10 +1,10 @@
 package plex.api;
 
-enum ObjectType {
+public enum ObjectType {
 
     SERVER("/"),
     LIBRARY("/library"),
-    LIBRARY_SECTION("/library/sections");
+    SECTION("/library/sections");
 
     private final String path;
 
