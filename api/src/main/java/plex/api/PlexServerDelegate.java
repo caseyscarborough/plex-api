@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @Accessors(fluent = true)
 @ToString
-final class PlexServerDelegate extends BasePlexObject {
+final class PlexServerDelegate {
     private final boolean allowsCameraUpload;
     private final boolean allowsChannelAccess;
     private final boolean allowsMediaDeletion;
@@ -62,9 +62,4 @@ final class PlexServerDelegate extends BasePlexObject {
     private final boolean updater;
     private final String version;
     private final boolean voiceSearch;
-
-    @Override
-    public ObjectType getType() {
-        return ObjectType.SERVER;
-    }
 }

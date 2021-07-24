@@ -4,7 +4,8 @@ public enum ObjectType {
 
     SERVER("/"),
     LIBRARY("/library"),
-    SECTION("/library/sections");
+    SECTION("/library/sections"),
+    SETTINGS("/:/prefs");
 
     private final String path;
 

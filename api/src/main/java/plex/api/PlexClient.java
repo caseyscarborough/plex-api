@@ -3,6 +3,7 @@ package plex.api;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import lombok.Getter;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -19,6 +20,7 @@ final class PlexClient {
 
     private static final String X_PLEX_TOKEN_HEADER = "X-Plex-Token";
 
+    @Getter
     private final String host;
     private final String token;
     private final OkHttpClient client;

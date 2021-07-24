@@ -1,10 +1,12 @@
 package plex.api;
 
 import lombok.experimental.Delegate;
+import plex.api.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public final class Library extends BasePlexObject {
@@ -32,6 +34,15 @@ public final class Library extends BasePlexObject {
             sections.add(section);
         }
         return sections;
+    }
+
+    public Section section(final String title) {
+        for (Section section : this.sections()) {
+            if (section.title().toLowerCase(Locale.ROOT).equals(title)) {
+                return section;
+            }
+        }
+        throw new NotFoundException("Invalid library section: " + title);
     }
 
     public Section sectionById(final String id) {

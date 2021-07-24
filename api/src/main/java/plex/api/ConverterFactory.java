@@ -12,7 +12,8 @@ final class ConverterFactory {
             new ServerConverter(),
             new LibraryConverter(),
             new LibraryFallbackConverter(),
-            new SectionConverter()
+            new SectionConverter(),
+            new SettingsConverter()
         );
     }
 

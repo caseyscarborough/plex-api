@@ -9,8 +9,9 @@ public final class PlexServer extends BasePlexObject {
     private static final String DEFAULT_SERVER = "http://localhost:32400";
 
     @Delegate
-    private PlexServerDelegate delegate;
+    private final PlexServerDelegate delegate;
     private Library library;
+    private Settings settings;
 
     public PlexServer(String token) {
         this(DEFAULT_SERVER, token);
@@ -29,8 +30,14 @@ public final class PlexServer extends BasePlexObject {
         super(client);
         // Cached Library
         this.library = null;
+        // Cached settings
+        this.settings = null;
         // Cached server
         this.delegate = server();
+    }
+
+    public String host() {
+        return getClient().getHost();
     }
 
     public Library library() {
@@ -49,7 +56,22 @@ public final class PlexServer extends BasePlexObject {
         return this.library;
     }
 
+    public Settings settings() {
+        if (this.settings != null) {
+            return this.settings;
+        }
+
+        SettingsDelegate delegate = getClient().get(ObjectType.SETTINGS, SettingsResponse.class, SettingsDelegate.class);
+        this.settings = new Settings(getClient(), delegate);
+        return this.settings;
+    }
+
     private PlexServerDelegate server() {
         return getClient().get(ObjectType.SERVER, ServerResponse.class, PlexServerDelegate.class);
+    }
+
+    @Override
+    public ObjectType getType() {
+        return ObjectType.SERVER;
     }
 }
