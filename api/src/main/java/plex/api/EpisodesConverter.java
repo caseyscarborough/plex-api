@@ -1,6 +1,8 @@
 package plex.api;
 
-final class EpisodesConverter extends BaseConverter<EpisodesResponse, EpisodeDelegate[]> {
+import java.util.stream.Collectors;
+
+final class EpisodesConverter extends VideoConverter<EpisodesResponse, EpisodeDelegate[]> {
     @Override
     public EpisodeDelegate[] convert(EpisodesResponse input) {
         return input.getVideo()
@@ -41,6 +43,7 @@ final class EpisodesConverter extends BaseConverter<EpisodesResponse, EpisodeDel
             .parentKey(video.getParentKey())
             .parentTitle(video.getParentTitle())
             .parentRatingKey(video.getParentRatingKey())
+            .medias(video.getMedia().stream().map(this::getMedia).collect(Collectors.toList()))
             .build();
     }
 

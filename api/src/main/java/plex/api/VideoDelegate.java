@@ -1,7 +1,6 @@
 package plex.api;
 
 import lombok.Getter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Accessors(fluent = true)
 @Getter
-@ToString
 class VideoDelegate {
 
     private final Integer ratingKey;
@@ -35,4 +33,9 @@ class VideoDelegate {
     private final String titleSort;
     private final Integer skipCount;
     private final Float userRating;
+
+    @Override
+    public String toString() {
+        return this.title() + " (" + this.year() + ")";
+    }
 }

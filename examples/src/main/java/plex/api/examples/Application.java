@@ -1,51 +1,45 @@
 package plex.api.examples;
 
-import plex.api.Library;
 import plex.api.Movie;
 import plex.api.PlexServer;
-import plex.api.Season;
-import plex.api.Section;
-import plex.api.Setting;
-import plex.api.Settings;
-import plex.api.Video;
-
-import java.util.List;
+import plex.api.Show;
 
 public class Application {
 
     public static void main(String[] args) {
         final String token = System.getenv("PLEX_TOKEN");
         final String host = System.getenv("PLEX_SERVER");
-        // Defaults to http://localhost:32400
+
+        // Create a new server. Host defaults to http://localhost:32400.
         PlexServer server = new PlexServer(host, token);
         System.out.println("Server Host: " + server.host());
         System.out.println("Plex Username: " + server.myPlexUsername());
 
-        final Library library = server.library();
-        System.out.println(library);
+        // Get the server library
+        server.library();
 
-        for (Section section : library.sections()) {
-            System.out.println(section);
-        }
+        // List all sections
+        server.library().sections().forEach(System.out::println);
 
-        final Settings settings = server.settings();
-        for (Setting setting : settings.all()) {
-            System.out.println(setting);
-        }
+        // List all settings
+        server.settings().all().forEach(System.out::println);
 
-        final List<Video> movies = server.library().section("Movies").all();
-        for (Video movie : movies) {
-            System.out.println(movie);
-        }
+        // List all items for a section
+        server.library().section("TV Shows").all().forEach(System.out::println);
 
-        final List<Video> shows = server.library().section("TV Shows").all();
-        for (Video show : shows) {
-            System.out.println(show);
-        }
-
-        final Movie lotr = server.library().section("Movies").movie("The Lord of the Rings: The Fellowship of the Ring");
+        // Get a movie by title
+        Movie lotr = server.library()
+            .section("Movies")
+            .movie("The Lord of the Rings: The Fellowship of the Ring");
         System.out.println(lotr);
 
+        // Get a show by title
+        Show show = server.library()
+            .section("TV Shows")
+            .show("Rick and Morty");
+        System.out.println(show);
+
+        // Get all episodes for a show (method #1)
         server.library()
             .section("TV Shows")
             .show("Rick and Morty")
@@ -54,6 +48,17 @@ public class Application {
             .flatMap(s -> s.episodes().stream())
             .forEach(System.out::println);
 
-        server.library().section("Movies").all((v) -> v.title().contains("Lord of the Rings")).forEach(System.out::println);
+        // Get all episodes for a show (method #2, more efficient than going through seasons)
+        server.library()
+            .section("TV Shows")
+            .show("Rick and Morty")
+            .allEpisodes()
+            .forEach(System.out::println);
+
+        // Find a movie using a filter
+        server.library()
+            .section("Movies")
+            .find((v) -> v.title().contains("Lord of the Rings"))
+            .forEach(System.out::println);
     }
 }

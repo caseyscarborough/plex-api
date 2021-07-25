@@ -9,7 +9,7 @@ import plex.api.MoviesResponse.Video.Writer;
 
 import java.util.stream.Collectors;
 
-class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
+class MoviesConverter extends VideoConverter<MoviesResponse, MovieDelegate[]> {
     @Override
     public MovieDelegate[] convert(MoviesResponse input) {
         return input.getVideo()
@@ -56,45 +56,6 @@ class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
             .audienceRatingImage(video.getAudienceRatingImage())
             .viewOffset(video.getViewOffset())
             .medias(video.getMedia().stream().map(this::getMedia).collect(Collectors.toList()))
-            .build();
-    }
-
-    private Media getMedia(MoviesResponse.Video.Media media) {
-        return Media.builder()
-            .aspectRatio(media.getAspectRatio())
-            .audioChannels(media.getAudioChannels())
-            .audioCodec(media.getAudioCodec())
-            .audioProfile(media.getAudioProfile())
-            .bitrate(media.getBitrate())
-            .container(media.getContainer())
-            .duration(media.getDuration())
-            .has64BitOffsets(toBoolean(media.getHas64BitOffsets()))
-            .height(media.getHeight())
-            .id(media.getId())
-            .optimizedForStreaming(toBoolean(media.getOptimizedForStreaming()))
-            .parts(media.getPart().stream().map(this::getPart).collect(Collectors.toList()))
-            .videoCodec(media.getVideoCodec())
-            .videoFrameRate(media.getVideoFrameRate())
-            .videoProfile(media.getVideoProfile())
-            .videoResolution(media.getVideoResolution())
-            .width(media.getWidth())
-            .build();
-    }
-
-    private MediaPart getPart(MoviesResponse.Video.Media.Part part) {
-        return MediaPart.builder()
-            .audioProfile(part.getAudioProfile())
-            .container(part.getContainer())
-            .duration(part.getDuration())
-            .file(part.getFile())
-            .has64BitOffsets(toBoolean(part.getHas64BitOffsets()))
-            .hasThumbnail(toBoolean(part.getHasThumbnail()))
-            .optimizedForStreaming(toBoolean(part.getOptimizedForStreaming()))
-            .id(part.getId())
-            .indexes(part.getIndexes())
-            .key(part.getKey())
-            .size(part.getSize())
-            .videoProfile(part.getVideoProfile())
             .build();
     }
 

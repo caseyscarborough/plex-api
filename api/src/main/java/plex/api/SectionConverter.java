@@ -31,7 +31,7 @@ final class SectionConverter extends BaseConverter<SectionResponse, SectionDeleg
             .scanner(section.getScanner())
             .thumb(section.getThumb())
             .title(section.getTitle())
-            .type(section.getType())
+            .type(SectionType.findByKey(section.getType()))
             .uuid(section.getUuid())
             .build();
     }

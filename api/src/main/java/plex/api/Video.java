@@ -34,4 +34,9 @@ public class Video extends BasePlexObject {
         }
         return (Movie) this;
     }
+
+    @Override
+    public String toString() {
+        return delegate.toString();
+    }
 }

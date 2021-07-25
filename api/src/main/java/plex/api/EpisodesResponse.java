@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +89,7 @@ final class EpisodesResponse {
 
         @XmlElement(name = "Media", required = true)
         @JacksonXmlElementWrapper(useWrapping = false)
-        private List<EpisodesResponse.Video.Media> media;
+        private List<MediaResponse> media;
         @XmlAttribute(name = "ratingKey")
         private Integer ratingKey;
         @XmlAttribute(name = "key")
@@ -152,89 +151,11 @@ final class EpisodesResponse {
         @XmlAttribute(name = "titleSort")
         private String titleSort;
 
-        public List<Media> getMedia() {
+        public List<MediaResponse> getMedia() {
             if (media == null) {
                 media = new ArrayList<>();
             }
             return media;
-        }
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "part"
-        })
-        @Getter
-        @Setter
-        public static class Media {
-
-            @XmlElement(name = "Part", required = true)
-            @JacksonXmlElementWrapper(useWrapping = false)
-            private List<EpisodesResponse.Video.Media.Part> part;
-            @XmlAttribute(name = "id")
-            private Integer id;
-            @XmlAttribute(name = "duration")
-            private Integer duration;
-            @XmlAttribute(name = "bitrate")
-            private Integer bitrate;
-            @XmlAttribute(name = "width")
-            private Integer width;
-            @XmlAttribute(name = "height")
-            private Integer height;
-            @XmlAttribute(name = "aspectRatio")
-            private Float aspectRatio;
-            @XmlAttribute(name = "audioChannels")
-            private Integer audioChannels;
-            @XmlAttribute(name = "audioCodec")
-            private String audioCodec;
-            @XmlAttribute(name = "videoCodec")
-            private String videoCodec;
-            @XmlAttribute(name = "videoResolution")
-            private Integer videoResolution;
-            @XmlAttribute(name = "container")
-            private String container;
-            @XmlAttribute(name = "videoFrameRate")
-            private String videoFrameRate;
-            @XmlAttribute(name = "audioProfile")
-            private String audioProfile;
-            @XmlAttribute(name = "videoProfile")
-            private String videoProfile;
-
-            public List<Part> getPart() {
-                if (part == null) {
-                    part = new ArrayList<>();
-                }
-                return part;
-            }
-
-            @XmlAccessorType(XmlAccessType.FIELD)
-            @XmlType(name = "", propOrder = {
-                "value"
-            })
-            @Getter
-            @Setter
-            public static class Part {
-
-                @XmlValue
-                private String value;
-                @XmlAttribute(name = "id")
-                private Integer id;
-                @XmlAttribute(name = "key")
-                private String key;
-                @XmlAttribute(name = "duration")
-                private Integer duration;
-                @XmlAttribute(name = "file")
-                private String file;
-                @XmlAttribute(name = "size")
-                private Integer size;
-                @XmlAttribute(name = "audioProfile")
-                private String audioProfile;
-                @XmlAttribute(name = "container")
-                private String container;
-                @XmlAttribute(name = "indexes")
-                private String indexes;
-                @XmlAttribute(name = "videoProfile")
-                private String videoProfile;
-            }
         }
     }
 }

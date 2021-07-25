@@ -2,7 +2,6 @@ package plex.api;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ import java.util.List;
 @Getter
 @Builder
 @Accessors(fluent = true)
-@ToString
 class SectionDelegate {
     private final boolean allowsSync;
     private final String art;
@@ -20,7 +18,7 @@ class SectionDelegate {
     private final boolean refreshing;
     private final String thumb;
     private final Integer key;
-    private final String type;
+    private final SectionType type;
     private final String title;
     private final String agent;
     private final String scanner;
@@ -33,4 +31,9 @@ class SectionDelegate {
     private final boolean directory;
     private final boolean hidden;
     private final List<String> locations;
+
+    @Override
+    public String toString() {
+        return this.title();
+    }
 }

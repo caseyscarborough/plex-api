@@ -78,7 +78,7 @@ final class MoviesResponse {
 
         @XmlElement(name = "Media", required = true)
         @JacksonXmlElementWrapper(useWrapping = false)
-        private List<MoviesResponse.Video.Media> media;
+        private List<MediaResponse> media;
         @XmlElement(name = "Genre")
         @JacksonXmlElementWrapper(useWrapping = false)
         private List<MoviesResponse.Video.Genre> genre;
@@ -163,7 +163,7 @@ final class MoviesResponse {
             return this.genre;
         }
 
-        public List<MoviesResponse.Video.Media> getMedia() {
+        public List<MediaResponse> getMedia() {
             if (media == null) {
                 media = new ArrayList<>();
             }
@@ -260,95 +260,6 @@ final class MoviesResponse {
             private String value;
             @XmlAttribute(name = "tag")
             private String tag;
-
-        }
-
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "part"
-        })
-        @Getter
-        @Setter
-        public static class Media {
-
-            @XmlElement(name = "Part", required = true)
-            @JacksonXmlElementWrapper(useWrapping = false)
-            private List<MoviesResponse.Video.Media.Part> part;
-            @XmlAttribute(name = "id")
-            private Integer id;
-            @XmlAttribute(name = "duration")
-            private Integer duration;
-            @XmlAttribute(name = "bitrate")
-            private Integer bitrate;
-            @XmlAttribute(name = "width")
-            private Integer width;
-            @XmlAttribute(name = "height")
-            private Integer height;
-            @XmlAttribute(name = "aspectRatio")
-            private Float aspectRatio;
-            @XmlAttribute(name = "audioChannels")
-            private Integer audioChannels;
-            @XmlAttribute(name = "audioCodec")
-            private String audioCodec;
-            @XmlAttribute(name = "videoCodec")
-            private String videoCodec;
-            @XmlAttribute(name = "videoResolution")
-            private String videoResolution;
-            @XmlAttribute(name = "container")
-            private String container;
-            @XmlAttribute(name = "videoFrameRate")
-            private String videoFrameRate;
-            @XmlAttribute(name = "optimizedForStreaming")
-            private Integer optimizedForStreaming;
-            @XmlAttribute(name = "audioProfile")
-            private String audioProfile;
-            @XmlAttribute(name = "has64bitOffsets")
-            private Integer has64BitOffsets;
-            @XmlAttribute(name = "videoProfile")
-            private String videoProfile;
-
-            public List<MoviesResponse.Video.Media.Part> getPart() {
-                if (part == null) {
-                    part = new ArrayList<>();
-                }
-                return this.part;
-            }
-
-            @XmlAccessorType(XmlAccessType.FIELD)
-            @XmlType(name = "", propOrder = {
-                "value"
-            })
-            @Getter
-            @Setter
-            public static class Part {
-
-                @XmlValue
-                private String value;
-                @XmlAttribute(name = "id")
-                private Integer id;
-                @XmlAttribute(name = "key")
-                private String key;
-                @XmlAttribute(name = "duration")
-                private Integer duration;
-                @XmlAttribute(name = "file")
-                private String file;
-                @XmlAttribute(name = "size")
-                private Long size;
-                @XmlAttribute(name = "audioProfile")
-                private String audioProfile;
-                @XmlAttribute(name = "container")
-                private String container;
-                @XmlAttribute(name = "has64bitOffsets")
-                private Integer has64BitOffsets;
-                @XmlAttribute(name = "indexes")
-                private String indexes;
-                @XmlAttribute(name = "optimizedForStreaming")
-                private Integer optimizedForStreaming;
-                @XmlAttribute(name = "videoProfile")
-                private String videoProfile;
-                @XmlAttribute(name = "hasThumbnail")
-                private Integer hasThumbnail;
-            }
 
         }
 

@@ -5,12 +5,16 @@ class SeasonsConverter extends BaseConverter<SeasonsResponse, SeasonDelegate[]> 
     public SeasonDelegate[] convert(SeasonsResponse input) {
         return input.getDirectory()
             .stream()
-            .map(this::getSeason)
+            .filter(d -> !d.getTitle().equals("All episodes"))
+            .map(d -> this.getSeason(input, d))
             .toArray(SeasonDelegate[]::new);
     }
 
-    private SeasonDelegate getSeason(SeasonsResponse.Directory season) {
+    private SeasonDelegate getSeason(SeasonsResponse response, SeasonsResponse.Directory season) {
         return SeasonDelegate.builder()
+            .librarySectionId(response.getLibrarySectionID())
+            .librarySectionTitle(response.getLibrarySectionTitle())
+            .librarySectionUUID(response.getLibrarySectionUUID())
             .addedAt(toLocalDateTime(season.getAddedAt()))
             .art(season.getArt())
             .key(season.getKey())

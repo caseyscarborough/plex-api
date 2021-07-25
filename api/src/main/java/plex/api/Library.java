@@ -14,18 +14,20 @@ public final class Library extends BasePlexObject {
 
     @Delegate
     private final LibraryDelegate delegate;
+    private final SectionFactory sectionFactory;
     private final Map<String, Section> sectionsById = new HashMap<>();
 
     Library(PlexClient client, LibraryDelegate delegate) {
         super(client);
         this.delegate = delegate;
+        this.sectionFactory = new SectionFactory(client);
     }
 
     public List<Section> sections() {
         final SectionDelegate[] delegates = this.getClient()
             .get(Endpoint.SECTIONS.getPath(), SectionResponse.class, SectionDelegate[].class);
         final List<Section> sections = Arrays.stream(delegates)
-            .map(d -> new Section(this.getClient(), d))
+            .map(sectionFactory::getInstance)
             .collect(Collectors.toList());
         sections.forEach(s -> this.sectionsById.put(s.uuid(), s));
         return sections;
@@ -43,5 +45,10 @@ public final class Library extends BasePlexObject {
             this.sections();
         }
         return this.sectionsById.get(id);
+    }
+
+    @Override
+    public String toString() {
+        return delegate.toString();
     }
 }

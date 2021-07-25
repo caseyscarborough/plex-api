@@ -2,16 +2,13 @@ package plex.api;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
 @Accessors(fluent = true)
-@ToString
 class SeasonDelegate {
 
     private final Integer ratingKey;
@@ -29,6 +26,9 @@ class SeasonDelegate {
     private final LocalDateTime lastViewedAt;
     private final LocalDateTime addedAt;
     private final LocalDateTime updatedAt;
+    private final Integer librarySectionId;
+    private final String librarySectionTitle;
+    private final String librarySectionUUID;
 
     // Parent (Show) Fields
     private final Integer parentRatingKey;
@@ -40,4 +40,9 @@ class SeasonDelegate {
     private final Integer parentIndex;
     private final String parentThumb;
     private final String parentTheme;
+
+    @Override
+    public String toString() {
+        return this.parentTitle() + " (" + this.parentYear() + ") - " + this.title();
+    }
 }
