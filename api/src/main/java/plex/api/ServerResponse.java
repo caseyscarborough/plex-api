@@ -21,7 +21,7 @@ import java.util.List;
 @XmlRootElement(name = "MediaContainer")
 @Getter
 @Setter
-class ServerResponse {
+final class ServerResponse {
 
     @XmlElement(name = "Directory")
     @JacksonXmlElementWrapper(useWrapping = false)

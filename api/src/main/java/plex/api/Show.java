@@ -20,7 +20,7 @@ public class Show extends Video {
 
     public List<Season> seasons() {
         return Arrays.stream(this.getClient().get(this.key(), SeasonsResponse.class, SeasonDelegate[].class))
-            .map(s -> new Season(this.getClient(), s))
+            .map(delegate -> new Season(this.getClient(), delegate))
             .collect(Collectors.toList());
     }
 }

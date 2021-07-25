@@ -7,20 +7,16 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @SuperBuilder
 @Accessors(fluent = true)
 @Getter
 @ToString
 class VideoDelegate {
-    private final List<String> collections;
-    private final List<String> roles;
-    private final List<String> genres;
+
     private final Integer ratingKey;
     private final String key;
     private final String guid;
-    private final String studio;
     private final String type;
     private final String title;
     private final String contentRating;

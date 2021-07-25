@@ -20,7 +20,7 @@ import java.util.List;
 @XmlRootElement(name = "MediaContainer")
 @Getter
 @Setter
-class SettingsResponse {
+final class SettingsResponse {
 
     @XmlElement(name = "Setting")
     @JacksonXmlElementWrapper(useWrapping = false)

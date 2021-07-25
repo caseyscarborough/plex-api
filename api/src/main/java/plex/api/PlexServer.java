@@ -50,7 +50,7 @@ public final class PlexServer extends BasePlexObject {
             delegate = getClient().get(Endpoint.LIBRARY.getPath(), LibraryResponse.class, LibraryDelegate.class);
         } catch (BadRequestException e) {
             // Fallback to /library/sections on bad request, only owners can call /library.
-            delegate = getClient().get(Endpoint.SECTION.getPath(), SectionResponse.class, LibraryDelegate.class);
+            delegate = getClient().get(Endpoint.SECTIONS.getPath(), SectionResponse.class, LibraryDelegate.class);
         }
         this.library = new Library(getClient(), delegate);
         return this.library;

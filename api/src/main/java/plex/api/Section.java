@@ -1,6 +1,7 @@
 package plex.api;
 
 import lombok.experimental.Delegate;
+import plex.api.exception.InvalidTypeException;
 import plex.api.exception.NotFoundException;
 
 import java.util.Arrays;
@@ -24,9 +25,13 @@ public final class Section extends BasePlexObject {
             .orElseThrow(() -> new IllegalStateException("Retrieving all media has not been implemented for " + this.type() + " type"));
     }
 
+    public List<Video> all(Filter<Video> filter) {
+        return all().stream().filter(filter::filter).collect(Collectors.toList());
+    }
+
     public Movie movie(final String title) {
         if (!this.type().equals("movie")) {
-            throw new IllegalArgumentException(this.title() + " section does not contain movies");
+            throw new InvalidTypeException(this.title() + " section does not contain movies");
         }
 
         return (Movie) get(title);
@@ -34,7 +39,7 @@ public final class Section extends BasePlexObject {
 
     public Show show(String title) {
         if (!this.type().equals("show")) {
-            throw new IllegalArgumentException(this.title() + " section does not contain shows");
+            throw new InvalidTypeException(this.title() + " section does not contain shows");
         }
 
         return (Show) get(title);

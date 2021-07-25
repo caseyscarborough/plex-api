@@ -21,7 +21,7 @@ import java.util.List;
 @XmlRootElement(name = "MediaContainer")
 @Getter
 @Setter
-class MoviesResponse {
+final class MoviesResponse {
 
     @XmlElement(name = "Video")
     @JacksonXmlElementWrapper(useWrapping = false)

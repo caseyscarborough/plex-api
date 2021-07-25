@@ -4,8 +4,8 @@ enum Endpoint {
 
     SERVER("/"),
     LIBRARY("/library"),
-    SECTION("/library/sections"),
     SETTINGS("/:/prefs"),
+    SECTIONS("/library/sections"),
     SECTIONS_ALL("/library/sections/%s/all"),
     SECTIONS_GET("/library/sections/%s/all?title=%s"),
     SECTIONS_ON_DECK("/library/sections/%s/onDeck");

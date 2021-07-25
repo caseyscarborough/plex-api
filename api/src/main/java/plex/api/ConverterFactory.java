@@ -16,7 +16,8 @@ final class ConverterFactory {
             new SettingsConverter(),
             new MoviesConverter(),
             new ShowsConverter(),
-            new SeasonsConverter()
+            new SeasonsConverter(),
+            new EpisodesConverter()
         );
     }
 

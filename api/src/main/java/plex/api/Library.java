@@ -23,7 +23,7 @@ public final class Library extends BasePlexObject {
 
     public List<Section> sections() {
         final SectionDelegate[] delegates = this.getClient()
-            .get(Endpoint.SECTION.getPath(), SectionResponse.class, SectionDelegate[].class);
+            .get(Endpoint.SECTIONS.getPath(), SectionResponse.class, SectionDelegate[].class);
         final List<Section> sections = Arrays.stream(delegates)
             .map(d -> new Section(this.getClient(), d))
             .collect(Collectors.toList());

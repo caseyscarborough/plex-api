@@ -3,6 +3,7 @@ package plex.api.examples;
 import plex.api.Library;
 import plex.api.Movie;
 import plex.api.PlexServer;
+import plex.api.Season;
 import plex.api.Section;
 import plex.api.Setting;
 import plex.api.Settings;
@@ -32,15 +33,15 @@ public class Application {
             System.out.println(setting);
         }
 
-//        final List<Video> movies = server.library().section("Movies").all();
-//        for (Video movie : movies) {
-//            System.out.println(movie);
-//        }
-//
-//        final List<Video> shows = server.library().section("TV Shows").all();
-//        for (Video show : shows) {
-//            System.out.println(show);
-//        }
+        final List<Video> movies = server.library().section("Movies").all();
+        for (Video movie : movies) {
+            System.out.println(movie);
+        }
+
+        final List<Video> shows = server.library().section("TV Shows").all();
+        for (Video show : shows) {
+            System.out.println(show);
+        }
 
         final Movie lotr = server.library().section("Movies").movie("The Lord of the Rings: The Fellowship of the Ring");
         System.out.println(lotr);
@@ -49,6 +50,10 @@ public class Application {
             .section("TV Shows")
             .show("Rick and Morty")
             .seasons()
+            .stream()
+            .flatMap(s -> s.episodes().stream())
             .forEach(System.out::println);
+
+        server.library().section("Movies").all((v) -> v.title().contains("Lord of the Rings")).forEach(System.out::println);
     }
 }
