@@ -6,7 +6,8 @@ public enum ObjectType {
     LIBRARY("/library"),
     SECTION("/library/sections"),
     SETTINGS("/:/prefs"),
-    ON_DECK("/library/sections/%s/onDeck");
+    SECTIONS_ALL("/library/sections/%s/all"),
+    SECTIONS_ON_DECK("/library/sections/%s/onDeck");
 
     private final String path;
 

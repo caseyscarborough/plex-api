@@ -25,107 +25,107 @@ class ServerResponse {
 
     @XmlElement(name = "Directory")
     @JacksonXmlElementWrapper(useWrapping = false)
-    protected List<ServerResponse.Directory> directory;
+    private List<ServerResponse.Directory> directory;
     @XmlAttribute(name = "size")
-    protected Integer size;
+    private Integer size;
     @XmlAttribute(name = "allowCameraUpload")
-    protected Integer allowCameraUpload;
+    private Integer allowCameraUpload;
     @XmlAttribute(name = "allowChannelAccess")
-    protected Integer allowChannelAccess;
+    private Integer allowChannelAccess;
     @XmlAttribute(name = "allowMediaDeletion")
-    protected Integer allowMediaDeletion;
+    private Integer allowMediaDeletion;
     @XmlAttribute(name = "allowSharing")
-    protected Integer allowSharing;
+    private Integer allowSharing;
     @XmlAttribute(name = "allowSync")
-    protected Integer allowSync;
+    private Integer allowSync;
     @XmlAttribute(name = "allowTuners")
-    protected Integer allowTuners;
+    private Integer allowTuners;
     @XmlAttribute(name = "backgroundProcessing")
-    protected Integer backgroundProcessing;
+    private Integer backgroundProcessing;
     @XmlAttribute(name = "certificate")
-    protected Integer certificate;
+    private Integer certificate;
     @XmlAttribute(name = "companionProxy")
-    protected Integer companionProxy;
+    private Integer companionProxy;
     @XmlAttribute(name = "countryCode")
-    protected String countryCode;
+    private String countryCode;
     @XmlAttribute(name = "diagnostics")
-    protected String diagnostics;
+    private String diagnostics;
     @XmlAttribute(name = "eventStream")
-    protected Integer eventStream;
+    private Integer eventStream;
     @XmlAttribute(name = "friendlyName")
-    protected String friendlyName;
+    private String friendlyName;
     @XmlAttribute(name = "hubSearch")
-    protected Integer hubSearch;
+    private Integer hubSearch;
     @XmlAttribute(name = "itemClusters")
-    protected Integer itemClusters;
+    private Integer itemClusters;
     @XmlAttribute(name = "livetv")
-    protected Integer livetv;
+    private Integer livetv;
     @XmlAttribute(name = "machineIdentifier")
-    protected String machineIdentifier;
+    private String machineIdentifier;
     @XmlAttribute(name = "mediaProviders")
-    protected Integer mediaProviders;
+    private Integer mediaProviders;
     @XmlAttribute(name = "multiuser")
-    protected Integer multiuser;
+    private Integer multiuser;
     @XmlAttribute(name = "myPlex")
-    protected Integer myPlex;
+    private Integer myPlex;
     @XmlAttribute(name = "myPlexMappingState")
-    protected String myPlexMappingState;
+    private String myPlexMappingState;
     @XmlAttribute(name = "myPlexSigninState")
-    protected String myPlexSigninState;
+    private String myPlexSigninState;
     @XmlAttribute(name = "myPlexSubscription")
-    protected Integer myPlexSubscription;
+    private Integer myPlexSubscription;
     @XmlAttribute(name = "myPlexUsername")
-    protected String myPlexUsername;
+    private String myPlexUsername;
     @XmlAttribute(name = "offlineTranscode")
-    protected Integer offlineTranscode;
+    private Integer offlineTranscode;
     @XmlAttribute(name = "ownerFeatures")
-    protected String ownerFeatures;
+    private String ownerFeatures;
     @XmlAttribute(name = "photoAutoTag")
-    protected Integer photoAutoTag;
+    private Integer photoAutoTag;
     @XmlAttribute(name = "platform")
-    protected String platform;
+    private String platform;
     @XmlAttribute(name = "platformVersion")
-    protected String platformVersion;
+    private String platformVersion;
     @XmlAttribute(name = "pluginHost")
-    protected Integer pluginHost;
+    private Integer pluginHost;
     @XmlAttribute(name = "pushNotifications")
-    protected Integer pushNotifications;
+    private Integer pushNotifications;
     @XmlAttribute(name = "readOnlyLibraries")
-    protected Integer readOnlyLibraries;
+    private Integer readOnlyLibraries;
     @XmlAttribute(name = "requestParametersInCookie")
-    protected Integer requestParametersInCookie;
+    private Integer requestParametersInCookie;
     @XmlAttribute(name = "streamingBrainABRVersion")
-    protected String streamingBrainABRVersion;
+    private String streamingBrainABRVersion;
     @XmlAttribute(name = "streamingBrainVersion")
-    protected String streamingBrainVersion;
+    private String streamingBrainVersion;
     @XmlAttribute(name = "sync")
-    protected Integer sync;
+    private Integer sync;
     @XmlAttribute(name = "transcoderActiveVideoSessions")
-    protected Integer transcoderActiveVideoSessions;
+    private Integer transcoderActiveVideoSessions;
     @XmlAttribute(name = "transcoderAudio")
-    protected Integer transcoderAudio;
+    private Integer transcoderAudio;
     @XmlAttribute(name = "transcoderLyrics")
-    protected Integer transcoderLyrics;
+    private Integer transcoderLyrics;
     @XmlAttribute(name = "transcoderPhoto")
-    protected Integer transcoderPhoto;
+    private Integer transcoderPhoto;
     @XmlAttribute(name = "transcoderSubtitles")
-    protected Integer transcoderSubtitles;
+    private Integer transcoderSubtitles;
     @XmlAttribute(name = "transcoderVideo")
-    protected Integer transcoderVideo;
+    private Integer transcoderVideo;
     @XmlAttribute(name = "transcoderVideoBitrates")
-    protected String transcoderVideoBitrates;
+    private String transcoderVideoBitrates;
     @XmlAttribute(name = "transcoderVideoQualities")
-    protected String transcoderVideoQualities;
+    private String transcoderVideoQualities;
     @XmlAttribute(name = "transcoderVideoResolutions")
-    protected String transcoderVideoResolutions;
+    private String transcoderVideoResolutions;
     @XmlAttribute(name = "updatedAt")
-    protected Integer updatedAt;
+    private Integer updatedAt;
     @XmlAttribute(name = "updater")
-    protected Integer updater;
+    private Integer updater;
     @XmlAttribute(name = "version")
-    protected String version;
+    private String version;
     @XmlAttribute(name = "voiceSearch")
-    protected Integer voiceSearch;
+    private Integer voiceSearch;
 
     public List<ServerResponse.Directory> getDirectory() {
         if (directory == null) {
@@ -143,12 +143,12 @@ class ServerResponse {
     public static class Directory {
 
         @XmlValue
-        protected String value;
+        private String value;
         @XmlAttribute(name = "count")
-        protected Integer count;
+        private Integer count;
         @XmlAttribute(name = "key")
-        protected String key;
+        private String key;
         @XmlAttribute(name = "title")
-        protected String title;
+        private String title;
     }
 }

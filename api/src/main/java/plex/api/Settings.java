@@ -1,8 +1,10 @@
 package plex.api;
 
+import lombok.ToString;
 import lombok.experimental.Delegate;
 import plex.api.exception.NotFoundException;
 
+@ToString
 public class Settings extends BasePlexObject {
 
     @Delegate

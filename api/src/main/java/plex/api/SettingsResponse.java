@@ -35,14 +35,6 @@ class SettingsResponse {
         return this.setting;
     }
 
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer value) {
-        this.size = value;
-    }
-
     @XmlAccessorType(XmlAccessType.FIELD)
     @Getter
     @Setter

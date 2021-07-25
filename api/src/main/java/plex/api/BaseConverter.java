@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class BaseConverter<F, T> implements Converter<F, T> {
@@ -25,8 +26,8 @@ abstract class BaseConverter<F, T> implements Converter<F, T> {
         return Arrays.stream(list.split(",")).map(String::trim).collect(Collectors.toList());
     }
 
-    protected LocalDateTime toLocalDateTime(long epoch) {
-        return Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    protected LocalDateTime toLocalDateTime(Integer epoch) {
+        return epoch == null ? null : Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     protected LocalDate toLocalDate(String date) {
@@ -35,5 +36,9 @@ abstract class BaseConverter<F, T> implements Converter<F, T> {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, formatter);
+    }
+
+    protected <A> List<String> toList(List<A> items, Function<A, String> function) {
+        return items != null ? items.stream().map(function).collect(Collectors.toList()) : new ArrayList<>();
     }
 }

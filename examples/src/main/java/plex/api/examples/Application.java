@@ -6,6 +6,7 @@ import plex.api.PlexServer;
 import plex.api.Section;
 import plex.api.Setting;
 import plex.api.Settings;
+import plex.api.Video;
 
 import java.util.List;
 
@@ -31,9 +32,15 @@ public class Application {
             System.out.println(setting);
         }
 
-        final List<Movie> movies = server.library().section("Movies").onDeck();
-        for (Movie movie : movies) {
+        final List<Video> movies = server.library().section("Movies").all();
+        for (Video movie : movies) {
             System.out.println(movie);
         }
+
+        final List<Video> shows = server.library().section("TV Shows").all();
+        for (Video show : shows) {
+            System.out.println(show);
+        }
+
     }
 }

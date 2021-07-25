@@ -156,6 +156,13 @@ class MoviesResponse {
         @XmlAttribute(name = "viewOffset")
         private Integer viewOffset;
 
+        public List<MoviesResponse.Video.Genre> getGenre() {
+            if (genre == null) {
+                genre = new ArrayList<>();
+            }
+            return this.genre;
+        }
+
         public List<MoviesResponse.Video.Media> getMedia() {
             if (media == null) {
                 media = new ArrayList<>();

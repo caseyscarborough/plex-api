@@ -9,29 +9,27 @@ import plex.api.MoviesResponse.Video.Writer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-class MoviesConverter extends BaseConverter<MoviesResponse, Movie[]> {
+class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
     @Override
-    public Movie[] convert(MoviesResponse input) {
-        List<Movie> output = new ArrayList<>();
-        for (MoviesResponse.Video video : input.getVideo()) {
+    public MovieDelegate[] convert(MoviesResponse input) {
+        List<MovieDelegate> movies = new ArrayList<>();
+        for (MoviesResponse.Video movie : input.getVideo()) {
             List<Media> medias = new ArrayList<>();
-            for (MoviesResponse.Video.Media m : video.getMedia()) {
+            for (MoviesResponse.Video.Media media : movie.getMedia()) {
                 List<MediaPart> parts = new ArrayList<>();
-                for (MoviesResponse.Video.Media.Part part : m.getPart()) {
+                for (MoviesResponse.Video.Media.Part part : media.getPart()) {
                     parts.add(getPart(part));
                 }
-                medias.add(getMedia(m, parts));
+                medias.add(getMedia(media, parts));
             }
-            output.add(getMovie(video, medias));
+            movies.add(getMovie(movie, medias));
         }
-        return output.toArray(new Movie[0]);
+        return movies.toArray(new MovieDelegate[0]);
     }
 
-    private Movie getMovie(MoviesResponse.Video video, List<Media> medias) {
-        return Movie.builder()
+    private MovieDelegate getMovie(MoviesResponse.Video video, List<Media> medias) {
+        return MovieDelegate.builder()
             .genres(toList(video.getGenre(), Genre::getTag))
             .directors(toList(video.getDirector(), Director::getTag))
             .writers(toList(video.getWriter(), Writer::getTag))
@@ -110,17 +108,13 @@ class MoviesConverter extends BaseConverter<MoviesResponse, Movie[]> {
             .build();
     }
 
-    private <T> List<String> toList(List<T> items, Function<T, String> function) {
-        return items != null ? items.stream().map(function).collect(Collectors.toList()) : new ArrayList<>();
-    }
-
     @Override
     public Class<MoviesResponse> from() {
         return MoviesResponse.class;
     }
 
     @Override
-    public Class<Movie[]> to() {
-        return Movie[].class;
+    public Class<MovieDelegate[]> to() {
+        return MovieDelegate[].class;
     }
 }
