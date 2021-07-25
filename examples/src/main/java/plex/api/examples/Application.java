@@ -32,15 +32,23 @@ public class Application {
             System.out.println(setting);
         }
 
-        final List<Video> movies = server.library().section("Movies").all();
-        for (Video movie : movies) {
-            System.out.println(movie);
-        }
+//        final List<Video> movies = server.library().section("Movies").all();
+//        for (Video movie : movies) {
+//            System.out.println(movie);
+//        }
+//
+//        final List<Video> shows = server.library().section("TV Shows").all();
+//        for (Video show : shows) {
+//            System.out.println(show);
+//        }
 
-        final List<Video> shows = server.library().section("TV Shows").all();
-        for (Video show : shows) {
-            System.out.println(show);
-        }
+        final Movie lotr = server.library().section("Movies").movie("The Lord of the Rings: The Fellowship of the Ring");
+        System.out.println(lotr);
 
+        server.library()
+            .section("TV Shows")
+            .show("Rick and Morty")
+            .seasons()
+            .forEach(System.out::println);
     }
 }

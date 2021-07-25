@@ -9,7 +9,7 @@ public class Movie extends Video {
     @Delegate
     private final MovieDelegate delegate;
 
-    public Movie(PlexClient client, MovieDelegate delegate) {
+    Movie(PlexClient client, MovieDelegate delegate) {
         super(client, delegate);
         this.delegate = delegate;
     }

@@ -10,7 +10,7 @@ public class Settings extends BasePlexObject {
     @Delegate
     private final SettingsDelegate delegate;
 
-    public Settings(PlexClient client, SettingsDelegate delegate) {
+    Settings(PlexClient client, SettingsDelegate delegate) {
         super(client);
         this.delegate = delegate;
     }

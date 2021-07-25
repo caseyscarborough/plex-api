@@ -47,10 +47,10 @@ public final class PlexServer extends BasePlexObject {
 
         LibraryDelegate delegate;
         try {
-            delegate = getClient().get(ObjectType.LIBRARY.getPath(), LibraryResponse.class, LibraryDelegate.class);
+            delegate = getClient().get(Endpoint.LIBRARY.getPath(), LibraryResponse.class, LibraryDelegate.class);
         } catch (BadRequestException e) {
             // Fallback to /library/sections on bad request, only owners can call /library.
-            delegate = getClient().get(ObjectType.SECTION.getPath(), SectionResponse.class, LibraryDelegate.class);
+            delegate = getClient().get(Endpoint.SECTION.getPath(), SectionResponse.class, LibraryDelegate.class);
         }
         this.library = new Library(getClient(), delegate);
         return this.library;
@@ -61,12 +61,12 @@ public final class PlexServer extends BasePlexObject {
             return this.settings;
         }
 
-        SettingsDelegate delegate = getClient().get(ObjectType.SETTINGS.getPath(), SettingsResponse.class, SettingsDelegate.class);
+        SettingsDelegate delegate = getClient().get(Endpoint.SETTINGS.getPath(), SettingsResponse.class, SettingsDelegate.class);
         this.settings = new Settings(getClient(), delegate);
         return this.settings;
     }
 
     private PlexServerDelegate server() {
-        return getClient().get(ObjectType.SERVER.getPath(), ServerResponse.class, PlexServerDelegate.class);
+        return getClient().get(Endpoint.SERVER.getPath(), ServerResponse.class, PlexServerDelegate.class);
     }
 }

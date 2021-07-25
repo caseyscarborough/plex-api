@@ -7,28 +7,18 @@ import plex.api.MoviesResponse.Video.Genre;
 import plex.api.MoviesResponse.Video.Role;
 import plex.api.MoviesResponse.Video.Writer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
     @Override
     public MovieDelegate[] convert(MoviesResponse input) {
-        List<MovieDelegate> movies = new ArrayList<>();
-        for (MoviesResponse.Video movie : input.getVideo()) {
-            List<Media> medias = new ArrayList<>();
-            for (MoviesResponse.Video.Media media : movie.getMedia()) {
-                List<MediaPart> parts = new ArrayList<>();
-                for (MoviesResponse.Video.Media.Part part : media.getPart()) {
-                    parts.add(getPart(part));
-                }
-                medias.add(getMedia(media, parts));
-            }
-            movies.add(getMovie(movie, medias));
-        }
-        return movies.toArray(new MovieDelegate[0]);
+        return input.getVideo()
+            .stream()
+            .map(this::getMovie)
+            .toArray(MovieDelegate[]::new);
     }
 
-    private MovieDelegate getMovie(MoviesResponse.Video video, List<Media> medias) {
+    private MovieDelegate getMovie(MoviesResponse.Video video) {
         return MovieDelegate.builder()
             .genres(toList(video.getGenre(), Genre::getTag))
             .directors(toList(video.getDirector(), Director::getTag))
@@ -65,11 +55,11 @@ class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
             .audienceRating(video.getAudienceRating())
             .audienceRatingImage(video.getAudienceRatingImage())
             .viewOffset(video.getViewOffset())
-            .medias(medias)
+            .medias(video.getMedia().stream().map(this::getMedia).collect(Collectors.toList()))
             .build();
     }
 
-    private Media getMedia(MoviesResponse.Video.Media media, List<MediaPart> parts) {
+    private Media getMedia(MoviesResponse.Video.Media media) {
         return Media.builder()
             .aspectRatio(media.getAspectRatio())
             .audioChannels(media.getAudioChannels())
@@ -82,7 +72,7 @@ class MoviesConverter extends BaseConverter<MoviesResponse, MovieDelegate[]> {
             .height(media.getHeight())
             .id(media.getId())
             .optimizedForStreaming(toBoolean(media.getOptimizedForStreaming()))
-            .parts(parts)
+            .parts(media.getPart().stream().map(this::getPart).collect(Collectors.toList()))
             .videoCodec(media.getVideoCodec())
             .videoFrameRate(media.getVideoFrameRate())
             .videoProfile(media.getVideoProfile())

@@ -1,16 +1,12 @@
 package plex.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 final class ShowsConverter extends BaseConverter<ShowsResponse, ShowDelegate[]> {
     @Override
     public ShowDelegate[] convert(ShowsResponse input) {
-        List<ShowDelegate> shows = new ArrayList<>();
-        for (ShowsResponse.Directory video : input.getDirectory()) {
-            shows.add(getShow(video));
-        }
-        return shows.toArray(new ShowDelegate[0]);
+        return input.getDirectory()
+            .stream()
+            .map(this::getShow)
+            .toArray(ShowDelegate[]::new);
     }
 
     private ShowDelegate getShow(ShowsResponse.Directory video) {

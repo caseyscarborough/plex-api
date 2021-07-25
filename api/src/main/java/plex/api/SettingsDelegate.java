@@ -14,5 +14,5 @@ import java.util.List;
 @ToString
 class SettingsDelegate {
 
-    private final List<Setting> all = new ArrayList<>();
+    private final List<Setting> all;
 }

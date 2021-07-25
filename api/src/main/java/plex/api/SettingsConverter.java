@@ -1,26 +1,29 @@
 package plex.api;
 
+import java.util.stream.Collectors;
+
 class SettingsConverter extends BaseConverter<SettingsResponse, SettingsDelegate> {
     @Override
     public SettingsDelegate convert(SettingsResponse input) {
-        SettingsDelegate settings = SettingsDelegate.builder().build();
-        for (SettingsResponse.Setting s : input.getSetting()) {
-            Setting setting = Setting
-                .builder()
-                .id(s.getId())
-                .value(s.getValueAttribute())
-                .advanced(toBoolean(s.getAdvanced()))
-                .enumValues(s.getEnumValues())
-                .defaultValue(s.getDefaultValue())
-                .hidden(toBoolean(s.getHidden()))
-                .group(s.getGroup())
-                .type(s.getType())
-                .label(s.getLabel())
-                .summary(s.getSummary())
-                .build();
-            settings.all().add(setting);
-        }
-        return settings;
+        return SettingsDelegate.builder()
+            .all(input.getSetting().stream().map(this::getSetting).collect(Collectors.toList()))
+            .build();
+    }
+
+    private Setting getSetting(SettingsResponse.Setting setting) {
+        return Setting
+            .builder()
+            .id(setting.getId())
+            .value(setting.getValueAttribute())
+            .advanced(toBoolean(setting.getAdvanced()))
+            .enumValues(setting.getEnumValues())
+            .defaultValue(setting.getDefaultValue())
+            .hidden(toBoolean(setting.getHidden()))
+            .group(setting.getGroup())
+            .type(setting.getType())
+            .label(setting.getLabel())
+            .summary(setting.getSummary())
+            .build();
     }
 
     @Override

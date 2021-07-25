@@ -1,0 +1,62 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MediaContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute type="xs:int" name="ratingKey" use="optional"/>
+                                <xs:attribute type="xs:string" name="key" use="optional"/>
+                                <xs:attribute type="xs:int" name="parentRatingKey" use="optional"/>
+                                <xs:attribute type="xs:string" name="guid" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentGuid" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentStudio" use="optional"/>
+                                <xs:attribute type="xs:string" name="type" use="optional"/>
+                                <xs:attribute type="xs:string" name="title" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentKey" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentTitle" use="optional"/>
+                                <xs:attribute type="xs:string" name="summary" use="optional"/>
+                                <xs:attribute type="xs:int" name="index" use="optional"/>
+                                <xs:attribute type="xs:int" name="parentIndex" use="optional"/>
+                                <xs:attribute type="xs:int" name="viewCount" use="optional"/>
+                                <xs:attribute type="xs:int" name="lastViewedAt" use="optional"/>
+                                <xs:attribute type="xs:int" name="parentYear" use="optional"/>
+                                <xs:attribute type="xs:string" name="thumb" use="optional"/>
+                                <xs:attribute type="xs:string" name="art" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentThumb" use="optional"/>
+                                <xs:attribute type="xs:string" name="parentTheme" use="optional"/>
+                                <xs:attribute type="xs:int" name="leafCount" use="optional"/>
+                                <xs:attribute type="xs:int" name="viewedLeafCount" use="optional"/>
+                                <xs:attribute type="xs:int" name="addedAt" use="optional"/>
+                                <xs:attribute type="xs:int" name="updatedAt" use="optional"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:int" name="size"/>
+            <xs:attribute type="xs:int" name="allowSync"/>
+            <xs:attribute type="xs:string" name="art"/>
+            <xs:attribute type="xs:string" name="banner"/>
+            <xs:attribute type="xs:string" name="identifier"/>
+            <xs:attribute type="xs:int" name="key"/>
+            <xs:attribute type="xs:int" name="librarySectionID"/>
+            <xs:attribute type="xs:string" name="librarySectionTitle"/>
+            <xs:attribute type="xs:string" name="librarySectionUUID"/>
+            <xs:attribute type="xs:string" name="mediaTagPrefix"/>
+            <xs:attribute type="xs:int" name="mediaTagVersion"/>
+            <xs:attribute type="xs:int" name="nocache"/>
+            <xs:attribute type="xs:int" name="parentIndex"/>
+            <xs:attribute type="xs:string" name="parentTitle"/>
+            <xs:attribute type="xs:int" name="parentYear"/>
+            <xs:attribute type="xs:string" name="summary"/>
+            <xs:attribute type="xs:string" name="theme"/>
+            <xs:attribute type="xs:string" name="thumb"/>
+            <xs:attribute type="xs:string" name="title1"/>
+            <xs:attribute type="xs:string" name="title2"/>
+            <xs:attribute type="xs:string" name="viewGroup"/>
+            <xs:attribute type="xs:int" name="viewMode"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

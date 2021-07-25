@@ -1,5 +1,5 @@
 package plex.api;
 
-public interface PlexObject {
+interface PlexObject {
 
 }

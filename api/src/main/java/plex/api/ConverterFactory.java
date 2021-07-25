@@ -15,7 +15,8 @@ final class ConverterFactory {
             new SectionConverter(),
             new SettingsConverter(),
             new MoviesConverter(),
-            new ShowsConverter()
+            new ShowsConverter(),
+            new SeasonsConverter()
         );
     }
 
@@ -27,11 +28,9 @@ final class ConverterFactory {
     // though as we're checking manually and only returning appropriate instances.
     @SuppressWarnings("unchecked")
     public <F, T> Converter<F, T> getInstance(Class<F> from, Class<T> to) {
-        for (Converter<?, ?> converter : converters) {
-            if (converter.from() == from && converter.to() == to) {
-                return (Converter<F, T>) converter;
-            }
-        }
-        throw new IllegalStateException("No converter found for " + from.getSimpleName() + " => " + to.getSimpleName());
+        return (Converter<F, T>) converters.stream()
+            .filter(c -> c.from() == from && c.to() == to)
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("No converter found for " + from.getSimpleName() + " => " + to.getSimpleName()));
     }
 }
