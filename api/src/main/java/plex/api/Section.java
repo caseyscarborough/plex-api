@@ -4,6 +4,8 @@ import lombok.experimental.Delegate;
 import plex.api.exception.InvalidTypeException;
 import plex.api.exception.NotFoundException;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ public abstract class Section extends BasePlexObject {
     }
 
     public Movie movie(final String title) {
-        if (!this.type().equals(SectionType.MOVIE)) {
+        if (!this.type().equals("movie")) {
             throw new InvalidTypeException(this.title() + " section does not contain movies");
         }
 
@@ -35,7 +37,7 @@ public abstract class Section extends BasePlexObject {
     }
 
     public Show show(String title) {
-        if (!this.type().equals(SectionType.SHOW)) {
+        if (!this.type().equals("show")) {
             throw new InvalidTypeException(this.title() + " section does not contain shows");
         }
 
@@ -48,6 +50,18 @@ public abstract class Section extends BasePlexObject {
             .filter(v -> v.title().toLowerCase(Locale.ROOT).equals(title.toLowerCase(Locale.ROOT)))
             .findFirst()
             .orElseThrow(() -> new NotFoundException("Invalid " + this.type() + " title: " + title));
+    }
+
+    public void scan() {
+        scan(null);
+    }
+
+    public void scan(final String path) {
+        String url = String.format("/library/sections/%s/refresh", this.key());
+        if (path != null) {
+            url += String.format("?path=%s", URLEncoder.encode(path, StandardCharsets.UTF_8));
+        }
+        this.getClient().get(url);
     }
 
     abstract List<Video> getVideos(final String path);

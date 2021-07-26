@@ -5,12 +5,15 @@ final class ShowsConverter extends BaseConverter<ShowsResponse, ShowDelegate[]> 
     public ShowDelegate[] convert(ShowsResponse input) {
         return input.getDirectory()
             .stream()
-            .map(this::getShow)
+            .map(d -> this.getShow(input, d))
             .toArray(ShowDelegate[]::new);
     }
 
-    private ShowDelegate getShow(ShowsResponse.Directory video) {
+    private ShowDelegate getShow(ShowsResponse response, ShowsResponse.Directory video) {
         return ShowDelegate.builder()
+            .librarySectionUUID(response.getLibrarySectionUUID())
+            .librarySectionTitle(response.getLibrarySectionTitle())
+            .librarySectionId(response.getLibrarySectionID())
             .genres(toList(video.getGenre(), ShowsResponse.Directory.Genre::getTag))
             .roles(toList(video.getRole(), ShowsResponse.Directory.Role::getTag))
             .collections(toList(video.getCollection(), ShowsResponse.Directory.Collection::getTag))

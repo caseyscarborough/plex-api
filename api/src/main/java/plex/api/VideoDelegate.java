@@ -33,6 +33,9 @@ class VideoDelegate {
     private final String titleSort;
     private final Integer skipCount;
     private final Float userRating;
+    private final String librarySectionUUID;
+    private final String librarySectionTitle;
+    private final Integer librarySectionId;
 
     @Override
     public String toString() {

@@ -11,9 +11,9 @@ class SectionFactory {
     }
 
     public Section getInstance(SectionDelegate delegate) {
-        if (delegate.type().equals(SectionType.MOVIE)) {
+        if (delegate.type().equals("movie")) {
             return new MovieSection(this.client, delegate);
-        } else if (delegate.type().equals(SectionType.SHOW)) {
+        } else if (delegate.type().equals("show")) {
             return new ShowSection(this.client, delegate);
         }
 

@@ -18,7 +18,7 @@ class SectionDelegate {
     private final boolean refreshing;
     private final String thumb;
     private final Integer key;
-    private final SectionType type;
+    private final String type;
     private final String title;
     private final String agent;
     private final String scanner;

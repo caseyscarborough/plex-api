@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ToString
-public class Season extends BasePlexObject {
+public class Season extends EditablePlexObject {
 
     @Delegate
     private final SeasonDelegate delegate;

@@ -3,7 +3,7 @@ package plex.api;
 import lombok.experimental.Delegate;
 import plex.api.exception.InvalidTypeException;
 
-public class Video extends BasePlexObject {
+public abstract class Video extends EditablePlexObject {
 
     @Delegate
     private final VideoDelegate delegate;

@@ -1,5 +1,12 @@
 package plex.api;
 
+import lombok.experimental.Delegate;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 abstract class BasePlexObject implements PlexObject {
 
     private final PlexClient client;

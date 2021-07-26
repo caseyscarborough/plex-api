@@ -7,12 +7,15 @@ final class EpisodesConverter extends VideoConverter<EpisodesResponse, EpisodeDe
     public EpisodeDelegate[] convert(EpisodesResponse input) {
         return input.getVideo()
             .stream()
-            .map(this::getEpisode)
+            .map(v -> this.getEpisode(input, v))
             .toArray(EpisodeDelegate[]::new);
     }
 
-    private EpisodeDelegate getEpisode(EpisodesResponse.Video video) {
+    private EpisodeDelegate getEpisode(EpisodesResponse response, EpisodesResponse.Video video) {
         return EpisodeDelegate.builder()
+            .librarySectionId(response.getLibrarySectionID())
+            .librarySectionTitle(response.getLibrarySectionTitle())
+            .librarySectionUUID(response.getLibrarySectionUUID())
             .ratingKey(video.getRatingKey())
             .key(video.getKey())
             .guid(video.getGuid())

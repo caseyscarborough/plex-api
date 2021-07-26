@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import plex.api.exception.BadRequestException;
 import plex.api.exception.NotFoundException;
@@ -43,9 +44,25 @@ final class PlexClient {
         this.factory = new ConverterFactory();
     }
 
+    void get(final String path) {
+        request("GET", path);
+    }
+
     <F, T> T get(final String path, Class<F> from, Class<T> to) {
+        return request("GET", path, from, to);
+    }
+
+    void put(final String path) {
+        request("PUT", path);
+    }
+
+    private String request(final String method, final String path) {
+        return this.request(method, path, String.class, String.class);
+    }
+
+    private <F, T> T request(final String method, final String path, Class<F> from, Class<T> to) {
         final String url = this.host + path;
-        Request request = new Request.Builder()
+        final Request request = builder(method)
             .url(url)
             .build();
 
@@ -53,9 +70,13 @@ final class PlexClient {
             final int code = response.code();
             final String body = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
-                F parsed = this.mapper.readValue(body, from);
-                Converter<F, T> converter = factory.getInstance(from, to);
-                return converter.convert(parsed);
+                if (from == String.class && to == String.class) {
+                    return (T) body;
+                } else {
+                    F parsed = this.mapper.readValue(body, from);
+                    Converter<F, T> converter = factory.getInstance(from, to);
+                    return converter.convert(parsed);
+                }
             }
 
             final String message = String.format("(%d) %s - %s", code, url, body.replace("\n", " "));
@@ -71,6 +92,22 @@ final class PlexClient {
             }
         } catch (IOException e) {
             throw new PlexException("Could not make call to " + url, e);
+        }
+    }
+
+    private Request.Builder builder(final String method) {
+        Request.Builder builder = new Request.Builder();
+        switch (method) {
+            case "GET":
+                return builder.get();
+            case "PUT":
+                return builder.put(RequestBody.create("", null));
+            case "POST":
+                return builder.post(RequestBody.create("", null));
+            case "DELETE":
+                return builder.delete();
+            default:
+                throw new IllegalArgumentException("Could not create request for " + method + " method");
         }
     }
 }

@@ -14,12 +14,15 @@ class MoviesConverter extends VideoConverter<MoviesResponse, MovieDelegate[]> {
     public MovieDelegate[] convert(MoviesResponse input) {
         return input.getVideo()
             .stream()
-            .map(this::getMovie)
+            .map(v -> this.getMovie(input, v))
             .toArray(MovieDelegate[]::new);
     }
 
-    private MovieDelegate getMovie(MoviesResponse.Video video) {
+    private MovieDelegate getMovie(MoviesResponse response, MoviesResponse.Video video) {
         return MovieDelegate.builder()
+            .librarySectionId(response.getLibrarySectionID())
+            .librarySectionTitle(response.getLibrarySectionTitle())
+            .librarySectionUUID(response.getLibrarySectionUUID())
             .genres(toList(video.getGenre(), Genre::getTag))
             .directors(toList(video.getDirector(), Director::getTag))
             .writers(toList(video.getWriter(), Writer::getTag))
