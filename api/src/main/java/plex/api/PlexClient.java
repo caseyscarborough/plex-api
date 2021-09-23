@@ -49,7 +49,16 @@ final class PlexClient {
     }
 
     <F, T> T get(final String path, Class<F> from, Class<T> to) {
-        return request("GET", path, from, to);
+        return request(builder("GET"), path, from, to);
+    }
+
+    void post(final String path) {
+        request("POST", path);
+    }
+
+    void post(final String path, byte[] bytes) {
+        final Request.Builder builder = new Request.Builder().post(RequestBody.create(bytes));
+        request(builder, path);
     }
 
     void put(final String path) {
@@ -57,12 +66,16 @@ final class PlexClient {
     }
 
     private String request(final String method, final String path) {
-        return this.request(method, path, String.class, String.class);
+        return this.request(builder(method), path, String.class, String.class);
     }
 
-    private <F, T> T request(final String method, final String path, Class<F> from, Class<T> to) {
+    private String request(Request.Builder builder, final String path) {
+        return this.request(builder, path, String.class, String.class);
+    }
+
+    private <F, T> T request(Request.Builder builder, final String path, Class<F> from, Class<T> to) {
         final String url = this.host + path;
-        final Request request = builder(method)
+        final Request request = builder
             .url(url)
             .build();
 

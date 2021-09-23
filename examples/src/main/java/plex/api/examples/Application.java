@@ -75,5 +75,17 @@ public class Application {
 
         // Scan a section for new media
         server.library().section("4K Movies").scan();
+
+        // Upload poster from a URL
+        server.library()
+            .section("Movies")
+            .movie("The Lord of the Rings: The Fellowship of the Ring")
+            .uploadPosterFromUrl("https://www.themoviedb.org/t/p/w1280/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg");
+
+        // Upload poster from a file
+        server.library()
+            .section("Movies")
+            .movie("The Lord of the Rings: The Fellowship of the Ring")
+            .uploadPosterFromFile("/Users/casey/Downloads/lotr.jpg");
     }
 }

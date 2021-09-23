@@ -1,7 +1,12 @@
 package plex.api;
 
+import plex.api.exception.PlexException;
+
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,6 +38,21 @@ abstract class EditablePlexObject extends BasePlexObject {
 
         final String url = String.format("/library/sections/%d/all?%s", librarySectionId(), urlencode(params));
         this.getClient().put(url);
+    }
+
+    public void uploadPosterFromUrl(final String url) {
+        final String key = String.format("/library/metadata/%s/posters?url=%s", this.ratingKey(), URLEncoder.encode(url, StandardCharsets.UTF_8));
+        this.getClient().post(key);
+    }
+
+    public void uploadPosterFromFile(final String filePath) {
+        final String key = String.format("/library/metadata/%s/posters?", this.ratingKey());
+        try {
+            final byte[] bytes = Files.readAllBytes(Paths.get(filePath));
+            this.getClient().post(key, bytes);
+        } catch (IOException e) {
+            throw new PlexException("Could not read file from " + filePath);
+        }
     }
 
     private String urlencode(Map<String, String> params) {

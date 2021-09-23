@@ -1,6 +1,7 @@
 package plex.api;
 
 import lombok.experimental.Delegate;
+import plex.api.exception.NotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,14 @@ public class Show extends Video {
         return Arrays.stream(this.getClient().get(this.key(), SeasonsResponse.class, SeasonDelegate[].class))
             .map(delegate -> new Season(this.getClient(), delegate))
             .collect(Collectors.toList());
+    }
+
+    public Season season(int index) {
+        return this.seasons()
+            .stream()
+            .filter(s -> s.index().equals(index))
+            .findFirst()
+            .orElseThrow(() -> new NotFoundException("Could not find Season " + index + " for " + this.title()));
     }
 
     public List<Episode> allEpisodes() {
