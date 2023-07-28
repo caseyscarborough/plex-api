@@ -1,0 +1,282 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MediaContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Genre" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:int" name="id" use="optional"/>
+                                            <xs:attribute type="xs:string" name="filter" use="optional"/>
+                                            <xs:attribute type="xs:string" name="tag" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Country">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:short" name="id"/>
+                                            <xs:attribute type="xs:string" name="filter"/>
+                                            <xs:attribute type="xs:string" name="tag"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Rating" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:string" name="image" use="optional"/>
+                                            <xs:attribute type="xs:float" name="rating" use="optional"/>
+                                            <xs:attribute type="xs:string" name="type" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Role" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:int" name="id" use="optional"/>
+                                            <xs:attribute type="xs:string" name="filter" use="optional"/>
+                                            <xs:attribute type="xs:string" name="tag" use="optional"/>
+                                            <xs:attribute type="xs:string" name="tagKey" use="optional"/>
+                                            <xs:attribute type="xs:string" name="role" use="optional"/>
+                                            <xs:attribute type="xs:string" name="thumb" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Location">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:string" name="path"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Preferences">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Setting" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute type="xs:string" name="id" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="label" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="summary" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="type" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="default" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="setting" use="optional"/>
+                                                        <xs:attribute type="xs:byte" name="hidden" use="optional"/>
+                                                        <xs:attribute type="xs:byte" name="advanced" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="group" use="optional"/>
+                                                        <xs:attribute type="xs:string" name="enumValues" use="optional"/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Extras">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Video" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Media">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Part">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Stream" maxOccurs="unbounded" minOccurs="0">
+                                                                                <xs:complexType>
+                                                                                    <xs:simpleContent>
+                                                                                        <xs:extension base="xs:string">
+                                                                                            <xs:attribute type="xs:int" name="id"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="streamType"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="default"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="codec"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="index"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:short" name="bitrate"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="bitDepth"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="chromaLocation"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="chromaSubsampling"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:short" name="codedHeight"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:short" name="codedWidth"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="colorPrimaries"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="colorRange"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="colorSpace"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="colorTrc"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:float" name="frameRate"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte"
+                                                                                                          name="hasScalingMatrix"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:short" name="height"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="level"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="profile"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="refFrames"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="scanType"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte"
+                                                                                                          name="streamIdentifier"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:short" name="width"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="displayTitle"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="extendedDisplayTitle"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="selected"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:byte" name="channels"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string" name="language"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="languageTag"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="languageCode"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:string"
+                                                                                                          name="audioChannelLayout"
+                                                                                                          use="optional"/>
+                                                                                            <xs:attribute type="xs:int" name="samplingRate"
+                                                                                                          use="optional"/>
+                                                                                        </xs:extension>
+                                                                                    </xs:simpleContent>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute type="xs:int" name="id" use="optional"/>
+                                                                        <xs:attribute type="xs:string" name="key" use="optional"/>
+                                                                        <xs:attribute type="xs:int" name="duration" use="optional"/>
+                                                                        <xs:attribute type="xs:string" name="file" use="optional"/>
+                                                                        <xs:attribute type="xs:int" name="size" use="optional"/>
+                                                                        <xs:attribute type="xs:string" name="audioProfile" use="optional"/>
+                                                                        <xs:attribute type="xs:string" name="container" use="optional"/>
+                                                                        <xs:attribute type="xs:byte" name="has64bitOffsets" use="optional"/>
+                                                                        <xs:attribute type="xs:byte" name="optimizedForStreaming"
+                                                                                      use="optional"/>
+                                                                        <xs:attribute type="xs:string" name="videoProfile" use="optional"/>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute type="xs:int" name="id" use="optional"/>
+                                                            <xs:attribute type="xs:int" name="duration" use="optional"/>
+                                                            <xs:attribute type="xs:short" name="bitrate" use="optional"/>
+                                                            <xs:attribute type="xs:short" name="width" use="optional"/>
+                                                            <xs:attribute type="xs:short" name="height" use="optional"/>
+                                                            <xs:attribute type="xs:float" name="aspectRatio" use="optional"/>
+                                                            <xs:attribute type="xs:byte" name="audioChannels" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="audioCodec" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="videoCodec" use="optional"/>
+                                                            <xs:attribute type="xs:short" name="videoResolution" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="container" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="videoFrameRate" use="optional"/>
+                                                            <xs:attribute type="xs:byte" name="optimizedForStreaming" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="audioProfile" use="optional"/>
+                                                            <xs:attribute type="xs:byte" name="has64bitOffsets" use="optional"/>
+                                                            <xs:attribute type="xs:string" name="videoProfile" use="optional"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:int" name="ratingKey" use="optional"/>
+                                                <xs:attribute type="xs:string" name="key" use="optional"/>
+                                                <xs:attribute type="xs:string" name="guid" use="optional"/>
+                                                <xs:attribute type="xs:string" name="type" use="optional"/>
+                                                <xs:attribute type="xs:string" name="title" use="optional"/>
+                                                <xs:attribute type="xs:string" name="summary" use="optional"/>
+                                                <xs:attribute type="xs:byte" name="index" use="optional"/>
+                                                <xs:attribute type="xs:string" name="thumb" use="optional"/>
+                                                <xs:attribute type="xs:string" name="primaryGuid" use="optional"/>
+                                                <xs:attribute type="xs:string" name="subtype" use="optional"/>
+                                                <xs:attribute type="xs:int" name="duration" use="optional"/>
+                                                <xs:attribute type="xs:int" name="addedAt" use="optional"/>
+                                                <xs:attribute type="xs:int" name="updatedAt" use="optional"/>
+                                                <xs:attribute type="xs:byte" name="extraType" use="optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:byte" name="size"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:int" name="ratingKey"/>
+                        <xs:attribute type="xs:string" name="key"/>
+                        <xs:attribute type="xs:string" name="guid"/>
+                        <xs:attribute type="xs:string" name="studio"/>
+                        <xs:attribute type="xs:string" name="type"/>
+                        <xs:attribute type="xs:string" name="title"/>
+                        <xs:attribute type="xs:string" name="librarySectionTitle"/>
+                        <xs:attribute type="xs:byte" name="librarySectionID"/>
+                        <xs:attribute type="xs:string" name="librarySectionKey"/>
+                        <xs:attribute type="xs:string" name="originalTitle"/>
+                        <xs:attribute type="xs:string" name="contentRating"/>
+                        <xs:attribute type="xs:string" name="summary"/>
+                        <xs:attribute type="xs:byte" name="index"/>
+                        <xs:attribute type="xs:float" name="audienceRating"/>
+                        <xs:attribute type="xs:byte" name="viewCount"/>
+                        <xs:attribute type="xs:byte" name="skipCount"/>
+                        <xs:attribute type="xs:int" name="lastViewedAt"/>
+                        <xs:attribute type="xs:short" name="year"/>
+                        <xs:attribute type="xs:string" name="thumb"/>
+                        <xs:attribute type="xs:string" name="art"/>
+                        <xs:attribute type="xs:int" name="duration"/>
+                        <xs:attribute type="xs:date" name="originallyAvailableAt"/>
+                        <xs:attribute type="xs:byte" name="leafCount"/>
+                        <xs:attribute type="xs:byte" name="viewedLeafCount"/>
+                        <xs:attribute type="xs:byte" name="childCount"/>
+                        <xs:attribute type="xs:int" name="addedAt"/>
+                        <xs:attribute type="xs:int" name="updatedAt"/>
+                        <xs:attribute type="xs:string" name="audienceRatingImage"/>
+                        <xs:attribute type="xs:string" name="primaryExtraKey"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="size"/>
+            <xs:attribute type="xs:byte" name="allowSync"/>
+            <xs:attribute type="xs:string" name="augmentationKey"/>
+            <xs:attribute type="xs:string" name="identifier"/>
+            <xs:attribute type="xs:byte" name="librarySectionID"/>
+            <xs:attribute type="xs:string" name="librarySectionTitle"/>
+            <xs:attribute type="xs:string" name="librarySectionUUID"/>
+            <xs:attribute type="xs:string" name="mediaTagPrefix"/>
+            <xs:attribute type="xs:int" name="mediaTagVersion"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Library extends BasePlexObject {
@@ -28,6 +29,7 @@ public final class Library extends BasePlexObject {
             .get(Endpoint.SECTIONS.getPath(), SectionResponse.class, SectionDelegate[].class);
         final List<Section> sections = Arrays.stream(delegates)
             .map(sectionFactory::getInstance)
+            .filter(Objects::nonNull)
             .collect(Collectors.toList());
         sections.forEach(s -> this.sectionsById.put(s.uuid(), s));
         return sections;

@@ -21,8 +21,8 @@ abstract class EditablePlexObject extends BasePlexObject {
             throw new IllegalArgumentException("The number of string parameters must be a factor of 2");
         }
         Map<String, String> params = new HashMap<>();
-        for (int i = 0; i < strings.length;) {
-            params.put(strings[i++], strings[i++]);
+        for (int i = 0; i < strings.length; i += 2) {
+            params.put(strings[i], strings[i + 1]);
         }
         edit(params);
     }
@@ -36,8 +36,22 @@ abstract class EditablePlexObject extends BasePlexObject {
             params.put("type", String.valueOf(SearchType.findByKey(type()).getCode()));
         }
 
-        final String url = String.format("/library/sections/%d/all?%s", librarySectionId(), urlencode(params));
+        final String url = String.format("/library/sections/%d/all?%s", librarySectionId(), urlencode(params)).replace("+", "%20");
         this.getClient().put(url);
+    }
+
+    public byte[] poster(Map<String, String> params) {
+        params.putIfAbsent("width", "720");
+        params.putIfAbsent("height", "1080");
+        params.put("url", thumb());
+        return this.getClient().get("/photo/:/transcode?" + urlencode(params), byte[].class, byte[].class);
+    }
+
+    public byte[] poster() {
+        Map<String, String> params = new HashMap<>();
+        params.put("minSize", "1");
+        params.put("upscale", "1");
+        return poster(params);
     }
 
     public void uploadPosterFromUrl(final String url) {
@@ -58,7 +72,7 @@ abstract class EditablePlexObject extends BasePlexObject {
     private String urlencode(Map<String, String> params) {
         return params.entrySet()
             .stream()
-            .map((e) -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
+            .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8) + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
             .collect(Collectors.joining("&"));
     }
 
@@ -67,4 +81,6 @@ abstract class EditablePlexObject extends BasePlexObject {
     abstract String type();
 
     abstract Integer librarySectionId();
+
+    abstract String thumb();
 }

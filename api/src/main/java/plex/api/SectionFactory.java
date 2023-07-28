@@ -17,6 +17,7 @@ class SectionFactory {
             return new ShowSection(this.client, delegate);
         }
 
-        throw new InvalidTypeException(delegate.type() + " section is not yet supported");
+        // throw new InvalidTypeException(delegate.type() + " section is not yet supported");
+        return null;
     }
 }
