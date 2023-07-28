@@ -7,7 +7,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
 
-    group 'plex.api'
+    group 'sh.casey'
     version '1.0-SNAPSHOT'
 
     repositories {
@@ -29,4 +29,3 @@ allprojects {
         useJUnitPlatform()
     }
 }
-
