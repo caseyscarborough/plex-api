@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import plex.api.exception.BadRequestException;
 import plex.api.exception.NotFoundException;
 import plex.api.exception.PlexException;
@@ -81,18 +82,20 @@ final class PlexClient {
 
         try (Response response = this.client.newCall(request).execute()) {
             final int code = response.code();
-            final String body = Objects.requireNonNull(response.body()).string();
+            final ResponseBody body = Objects.requireNonNull(response.body());
             if (response.isSuccessful()) {
                 if (from == String.class && to == String.class) {
-                    return (T) body;
+                    return (T) body.string();
+                } else if (to == byte[].class) {
+                    return (T) body.bytes();
                 } else {
-                    F parsed = this.mapper.readValue(body, from);
+                    F parsed = this.mapper.readValue(body.string(), from);
                     Converter<F, T> converter = factory.getInstance(from, to);
                     return converter.convert(parsed);
                 }
             }
 
-            final String message = String.format("(%d) %s - %s", code, url, body.replace("\n", " "));
+            final String message = String.format("(%d) %s - %s", code, url, body.string().replace("\n", " "));
             switch (code) {
                 case 401:
                     throw new UnauthorizedException(message);
