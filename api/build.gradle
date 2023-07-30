@@ -2,6 +2,9 @@ plugins {
     id 'maven-publish'
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'

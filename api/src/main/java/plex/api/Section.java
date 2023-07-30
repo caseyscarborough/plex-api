@@ -3,9 +3,8 @@ package plex.api;
 import lombok.experimental.Delegate;
 import plex.api.exception.InvalidTypeException;
 import plex.api.exception.NotFoundException;
+import plex.api.utils.URLEncode;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -59,7 +58,7 @@ public abstract class Section extends BasePlexObject {
     public void scan(final String path) {
         String url = String.format("/library/sections/%s/refresh", this.key());
         if (path != null) {
-            url += String.format("?path=%s", URLEncoder.encode(path, StandardCharsets.UTF_8));
+            url += String.format("?path=%s", URLEncode.encode(path));
         }
         this.getClient().get(url);
     }

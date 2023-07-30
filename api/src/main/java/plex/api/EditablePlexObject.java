@@ -1,6 +1,7 @@
 package plex.api;
 
 import plex.api.exception.PlexException;
+import plex.api.utils.URLEncode;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -55,7 +56,7 @@ abstract class EditablePlexObject extends BasePlexObject {
     }
 
     public void uploadPosterFromUrl(final String url) {
-        final String key = String.format("/library/metadata/%s/posters?url=%s", this.ratingKey(), URLEncoder.encode(url, StandardCharsets.UTF_8));
+        final String key = String.format("/library/metadata/%s/posters?url=%s", this.ratingKey(), URLEncode.encode(url));
         this.getClient().post(key);
     }
 
@@ -72,7 +73,7 @@ abstract class EditablePlexObject extends BasePlexObject {
     private String urlencode(Map<String, String> params) {
         return params.entrySet()
             .stream()
-            .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8) + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
+            .map(e -> URLEncode.encode(e.getKey()) + "=" + URLEncode.encode(e.getValue()))
             .collect(Collectors.joining("&"));
     }
 
