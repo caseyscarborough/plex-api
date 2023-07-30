@@ -1,7 +1,5 @@
 package plex.api;
 
-import plex.api.exception.InvalidTypeException;
-
 class SectionFactory {
 
     private final PlexClient client;

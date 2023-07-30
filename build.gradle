@@ -7,7 +7,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
 
-    group 'sh.casey'
+    group 'sh.casey.plex'
     version '1.0-SNAPSHOT'
 
     repositories {

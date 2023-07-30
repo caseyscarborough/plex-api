@@ -49,6 +49,22 @@ public final class Library extends BasePlexObject {
         return this.sectionsById.get(id);
     }
 
+    public Show showById(final String id) {
+        final ShowDelegate[] shows = this.getClient().get(String.format(Endpoint.METADATA.getPath(), id), ShowsResponse.class, ShowDelegate[].class);
+        if (shows.length == 0) {
+            throw new NotFoundException("Invalid show id: " + id);
+        }
+        return new Show(this.getClient(), shows[0]);
+    }
+
+    public Movie movieById(final String id) {
+        final MovieDelegate[] movies = this.getClient().get(String.format(Endpoint.METADATA.getPath(), id), MoviesResponse.class, MovieDelegate[].class);
+        if (movies.length == 0) {
+            throw new NotFoundException("Invalid movie id: " + id);
+        }
+        return new Movie(this.getClient(), movies[0]);
+    }
+
     @Override
     public String toString() {
         return delegate.toString();

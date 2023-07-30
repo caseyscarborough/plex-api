@@ -36,11 +36,11 @@ final class PlexClient {
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         this.mapper.registerModule(new JaxbAnnotationModule());
         this.client = new OkHttpClient.Builder().addInterceptor(chain ->
-            chain.proceed(
-                chain.request()
-                    .newBuilder()
-                    .addHeader(X_PLEX_TOKEN_HEADER, PlexClient.this.token)
-                    .build()))
+                chain.proceed(
+                    chain.request()
+                        .newBuilder()
+                        .addHeader(X_PLEX_TOKEN_HEADER, PlexClient.this.token)
+                        .build()))
             .build();
         this.factory = new ConverterFactory();
     }
