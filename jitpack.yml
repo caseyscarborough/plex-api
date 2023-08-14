@@ -1,0 +1,4 @@
+jdk:
+  - openjdk8
+install:
+  - ./gradlew -b api/build.gradle -Pversion=${VERSION} publishToMavenLocal
