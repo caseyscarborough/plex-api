@@ -4,8 +4,6 @@ import plex.api.exception.PlexException;
 import plex.api.utils.URLEncode;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -55,26 +53,20 @@ abstract class EditablePlexObject extends BasePlexObject {
         return poster(params);
     }
 
+    public void uploadArtFromUrl(final String url) {
+        uploadImageFromUrl("arts", url);
+    }
+
+    public void uploadArtFromFile(final String filePath) {
+        uploadImageFromFile("arts", filePath);
+    }
+
     public void uploadPosterFromUrl(final String url) {
-        final String key = String.format("/library/metadata/%s/posters?url=%s", this.ratingKey(), URLEncode.encode(url));
-        this.getClient().post(key);
+        uploadImageFromUrl("posters", url);
     }
 
     public void uploadPosterFromFile(final String filePath) {
-        final String key = String.format("/library/metadata/%s/posters?", this.ratingKey());
-        try {
-            final byte[] bytes = Files.readAllBytes(Paths.get(filePath));
-            this.getClient().post(key, bytes);
-        } catch (IOException e) {
-            throw new PlexException("Could not read file from " + filePath);
-        }
-    }
-
-    private String urlencode(Map<String, String> params) {
-        return params.entrySet()
-            .stream()
-            .map(e -> URLEncode.encode(e.getKey()) + "=" + URLEncode.encode(e.getValue()))
-            .collect(Collectors.joining("&"));
+        uploadImageFromFile("posters", filePath);
     }
 
     abstract Integer ratingKey();
@@ -84,4 +76,28 @@ abstract class EditablePlexObject extends BasePlexObject {
     abstract Integer librarySectionId();
 
     abstract String thumb();
+
+    abstract String art();
+
+    private String urlencode(Map<String, String> params) {
+        return params.entrySet()
+            .stream()
+            .map(e -> URLEncode.encode(e.getKey()) + "=" + URLEncode.encode(e.getValue()))
+            .collect(Collectors.joining("&"));
+    }
+
+    private void uploadImageFromUrl(final String type, final String url) {
+        final String key = String.format("/library/metadata/%s/%s?url=%s", this.ratingKey(), type, URLEncode.encode(url));
+        this.getClient().post(key);
+    }
+
+    private void uploadImageFromFile(final String type, final String filePath) {
+        final String key = String.format("/library/metadata/%s/%s?", this.ratingKey(), type);
+        try {
+            final byte[] bytes = Files.readAllBytes(Paths.get(filePath));
+            this.getClient().post(key, bytes);
+        } catch (IOException e) {
+            throw new PlexException("Could not read file from " + filePath);
+        }
+    }
 }
